@@ -1,56 +1,12 @@
 require 'yield_star_client/validations'
-require 'modelish'
 
 module YieldStarClient
-  # Represents a summary of rent information for a floor plan/unit type combination.
-  #
-  # @attr [Date] effective_date the data on which all listed prices are considered effective
-  # @attr [String] external_property_id the ID of the property associated with the floor plan
-  # @attr [String] floor_plan_name the floor plan that matches the Price Optimizer dashboard
-  # @attr [String] unit_type the unit type for this information
-  # @attr [Float] bedrooms the number of bedrooms in this unit type
-  # @attr [Float] bathrooms the number of bathrooms in this unit type
-  # @attr [Integer] avg_square_feet the average square footage in this unit type
-  # @attr [Integer] min_market_rent the minimum market rents for the currently available units
-  #                                 in this unit type
-  # @attr [Integer] max_market_rent the maximum market rents for the currently available units
-  #                                 in this unit type
-  # @attr [Object] concession_type reserved for future use by YieldStar
-  # @attr [Integer] min_concession the minimum value of any ocncessions (rent discount,
-  #                                recurrent discounts currently being offtered) for
-  #                                this particular unit type
-  # @attr [Integer] max_concession the maximum value of any concessions (rent discounts,
-  #                                recurrent discounts currently being offered) for this
-  #                                particular unit type
-  # @attr [Integer] min_final_rent the minimum **EFFECTIVE** rents for the currently available
-  #                                units in this unit type
-  # @attr [Integer] max_final_rent the maximum **EFFECTIVE** rents for the currently available
-  #                                units in this unit type.
-  # @attr [String] floor_plan_description the marketing name of the floor plan
-  class RentSummary < Modelish::Base
-    property :effective_date, :type => Date
-    property :external_property_id
-    property :floor_plan_name
-    property :unit_type
-    property :bedrooms, :type => Float, :from => :bed_rooms
-    property :bathrooms, :type => Float, :from => :bath_rooms
-    property :avg_square_feet, :type => Integer, :from => :avg_sq_ft
-    property :min_market_rent, :type => Integer
-    property :max_market_rent, :type => Integer
-    property :concession_type
-    property :min_concession, :type => Integer
-    property :max_concession, :type => Integer
-    property :min_final_rent, :type => Integer
-    property :max_final_rent, :type => Integer
-    property :floor_plan_description
-  end
-
   # Represents a floor plan with available units.
   #
   # @attr [String] external_property_id the ID of the property associated with the
   #                                     floor plan
   # @attr [Date] effective_date the date that all listed prices are considered effective
-  # @attr [String] floor_plan_name the name of the floor plan that matches the 
+  # @attr [String] floor_plan_name the name of the floor plan that matches the
   #                                Price Optimizer dashboard
   # @attr [Array<AvailableUnit>] units the available unit data associated with this
   #                                    floor plan
@@ -90,13 +46,13 @@ module YieldStarClient
   # @attr [Integer] base_market_rent the 12-month market rent
   # @attr [Integer] base_concession the concession amountt
   # @attr [Integer] base_final_rent the 12-month effective rent (market rent less concessions)
-  # @attr [Integer] best_lease_term the lease term associated with the best price from 
+  # @attr [Integer] best_lease_term the lease term associated with the best price from
   #                                 the Lease Term Rent Matrix.
-  # @attr [Integer] best_market_rent the market monthly rent associated with the best price 
+  # @attr [Integer] best_market_rent the market monthly rent associated with the best price
   #                                  term and move-in period
-  # @attr [Integer] best_concession the concession associated with the best price term 
+  # @attr [Integer] best_concession the concession associated with the best price term
   #                                 and move-in period
-  # @attr [Integer] best_final_rent the effective monthly rent associated with the best 
+  # @attr [Integer] best_final_rent the effective monthly rent associated with the best
   #                                 price term and move-in period
   class AvailableUnit < Modelish::Base
     property :building
@@ -142,7 +98,7 @@ module YieldStarClient
       summaries.flatten.collect { |s| RentSummary.new(shared_props.merge(s)) }
     end
 
-    # Retrieves rental information for all currently available units at a specific 
+    # Retrieves rental information for all currently available units at a specific
     # property, grouped by floor plan.
     #
     # @param [String] external_property_id the ID of the property where the available
