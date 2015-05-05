@@ -6,7 +6,7 @@ module YieldStarClient
   # @attr [String] external_property_id the ID of the property associated with the
   #                                     floor plan
   # @attr [Date] effective_date the date that all listed prices are considered effective
-  # @attr [String] floor_plan_name the name of the floor plan that matches the 
+  # @attr [String] floor_plan_name the name of the floor plan that matches the
   #                                Price Optimizer dashboard
   # @attr [Array<AvailableUnit>] units the available unit data associated with this
   #                                    floor plan
@@ -46,13 +46,13 @@ module YieldStarClient
   # @attr [Integer] base_market_rent the 12-month market rent
   # @attr [Integer] base_concession the concession amountt
   # @attr [Integer] base_final_rent the 12-month effective rent (market rent less concessions)
-  # @attr [Integer] best_lease_term the lease term associated with the best price from 
+  # @attr [Integer] best_lease_term the lease term associated with the best price from
   #                                 the Lease Term Rent Matrix.
-  # @attr [Integer] best_market_rent the market monthly rent associated with the best price 
+  # @attr [Integer] best_market_rent the market monthly rent associated with the best price
   #                                  term and move-in period
-  # @attr [Integer] best_concession the concession associated with the best price term 
+  # @attr [Integer] best_concession the concession associated with the best price term
   #                                 and move-in period
-  # @attr [Integer] best_final_rent the effective monthly rent associated with the best 
+  # @attr [Integer] best_final_rent the effective monthly rent associated with the best
   #                                 price term and move-in period
   class AvailableUnit < Modelish::Base
     property :building
@@ -98,7 +98,7 @@ module YieldStarClient
       summaries.flatten.collect { |s| RentSummary.new(shared_props.merge(s)) }
     end
 
-    # Retrieves rental information for all currently available units at a specific 
+    # Retrieves rental information for all currently available units at a specific
     # property, grouped by floor plan.
     #
     # @param [String] external_property_id the ID of the property where the available
