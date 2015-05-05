@@ -40,5 +40,16 @@ module YieldStarClient
     property :min_final_rent, :type => Integer
     property :max_final_rent, :type => Integer
     property :floor_plan_description
+    property :bedrooms_override_from_unit_type, :type => Float
+    property :bathrooms_override_from_unit_type, :type => Float
+
+    def initialize(attrs)
+      split_string = attrs[:unit_type].split('x')
+      attrs[:bedrooms_override_from_unit_type] = split_string[0] unless attrs[:bedrooms_override_from_unit_type]
+      attrs[:bathrooms_override_from_unit_type] = split_string[1] unless attrs[:bathrooms_override_from_unit_type]
+
+      super(attrs)
+    end
+
   end
 end
