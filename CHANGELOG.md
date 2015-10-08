@@ -1,3 +1,7 @@
+## TBA
+
+* Add `FloorPlan#id` that is a hash of the `external_property_id` and `name`
+
 ## 1.2.0
 
 * Include `#bedrooms_override_from_unit_type` and `#bathrooms_override_from_unit_type` in RentSummary#to_hash

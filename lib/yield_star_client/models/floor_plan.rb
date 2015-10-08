@@ -20,6 +20,10 @@ module YieldStarClient
     property :unit_count, :type => Integer
     property :bedrooms, :type => Float, :from => :bed_rooms
     property :bathrooms, :type => Float, :from => :bath_rooms
+
+    def id
+      @id || Digest::SHA1.hexdigest([external_property_id, name].join("-"))
+    end
   end
 
 end
