@@ -1,9 +1,10 @@
 module YieldStarClient
-  class Amenity < Modelish::Base
+  class Amenity
+    include Virtus.model
 
-    property :name
-    property :type
-    property :value, :type => Float
+    attribute :name
+    attribute :type
+    attribute :value, Float
 
   end
 end
