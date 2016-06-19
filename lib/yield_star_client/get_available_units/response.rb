@@ -3,10 +3,10 @@ module YieldStarClient
     class Response < BaseResponse
 
       def available_units
-        return @availabale_units if @availabale_units
+        return @available_units if @available_units
         available_floor_plan_hashes =
           extract_available_floor_plan_hashes_from(@soap_response.to_hash)
-        @availabale_units = available_floor_plan_hashes.map do |hash|
+        @available_units = available_floor_plan_hashes.map do |hash|
           AvailableFloorPlan.new(hash)
         end
       end
