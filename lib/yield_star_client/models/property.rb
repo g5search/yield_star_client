@@ -16,19 +16,21 @@ module YieldStarClient
   # @attr [Integer] unit_count the number of units at this property
   # @attr [String] website the URL of the property website
   # @attr [Integer] year_built the year in which the property was built
-  class Property < Modelish::Base
-    property :external_property_id
-    property :name
-    property :address
-    property :city
-    property :state
-    property :zip
-    property :fax
-    property :phone
-    property :latitude, :type => Float
-    property :longitude, :type => Float
-    property :unit_count, :type => Integer
-    property :website
-    property :year_built, :type => Integer
+  class Property
+    include Virtus.model
+
+    attribute :external_property_id
+    attribute :name
+    attribute :address
+    attribute :city
+    attribute :state
+    attribute :zip
+    attribute :fax
+    attribute :phone
+    attribute :latitude, Float
+    attribute :longitude, Float
+    attribute :unit_count, Integer
+    attribute :website
+    attribute :year_built, Integer
   end
 end

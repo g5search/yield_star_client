@@ -16,28 +16,36 @@ module YieldStarClient
   # @attr [Integer] base_market_rent the 12-month market rent
   # @attr [Integer] base_concession the concession amountt
   # @attr [Integer] base_final_rent the 12-month effective rent (market rent less concessions)
-  # @attr [Integer] best_lease_term the lease term associated with the best price from 
+  # @attr [Integer] best_lease_term the lease term associated with the best price from
   #                                 the Lease Term Rent Matrix.
-  # @attr [Integer] best_market_rent the market monthly rent associated with the best price 
+  # @attr [Integer] best_market_rent the market monthly rent associated with the best price
   #                                  term and move-in period
-  # @attr [Integer] best_concession the concession associated with the best price term 
+  # @attr [Integer] best_concession the concession associated with the best price term
   #                                 and move-in period
-  # @attr [Integer] best_final_rent the effective monthly rent associated with the best 
+  # @attr [Integer] best_final_rent the effective monthly rent associated with the best
   #                                 price term and move-in period
-  class AvailableUnit < Modelish::Base
-    property :building
-    property :unit_type
-    property :unit_number
-    property :features, :type => Array, :default => [], :from => :feature
-    property :status, :type => Symbol
-    property :date_available, :type => Date
-    property :base_market_rent, :type => Integer
-    property :base_concession, :type => Integer
-    property :base_final_rent, :type => Integer
-    property :best_lease_term, :type => Integer
-    property :best_market_rent, :type => Integer
-    property :best_concession, :type => Integer
-    property :best_final_rent, :type => Integer
+  class AvailableUnit
+    include Virtus.model
+
+    attribute :building
+    attribute :unit_type
+    attribute :unit_number
+    attribute :features, Array, default: []
+    attribute :status, Symbol
+    attribute :date_available, Date
+    attribute :base_market_rent, Integer
+    attribute :base_concession, Integer
+    attribute :base_final_rent, Integer
+    attribute :best_lease_term, Integer
+    attribute :best_market_rent, Integer
+    attribute :best_concession, Integer
+    attribute :best_final_rent, Integer
+
+    def self.new(attributes={})
+      attributes[:features] = attributes.delete :feature
+
+      super(attributes)
+    end
 
     def id
       concat = [building, unit_type, unit_number].join("-")

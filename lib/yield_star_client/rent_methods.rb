@@ -23,7 +23,7 @@ module YieldStarClient
       GetRentSummary::Response.new(response).rent_summaries
     end
 
-    # Retrieves rental information for all currently available units at a specific 
+    # Retrieves rental information for all currently available units at a specific
     # property, grouped by floor plan.
     #
     # @param [String] external_property_id the ID of the property where the available

@@ -12,14 +12,24 @@ module YieldStarClient
   # @attr [Integer] unit_count the number of units with this floor plan
   # @attr [Float] bedrooms the bedroom count of the floor plan
   # @attr [Float] bathrooms the bathroom count of the floor plan
-  class FloorPlan < Modelish::Base
-    property :external_property_id
-    property :name
-    property :description
-    property :square_feet, :type => Integer, :from => :square_footage
-    property :unit_count, :type => Integer
-    property :bedrooms, :type => Float, :from => :bed_rooms
-    property :bathrooms, :type => Float, :from => :bath_rooms
-  end
+  class FloorPlan
+    include Virtus.model
 
+    attribute :external_property_id
+    attribute :name
+    attribute :description
+    attribute :square_feet, Integer, :from => :square_footage
+    attribute :unit_count, Integer
+    attribute :bedrooms, Float, :from => :bed_rooms
+    attribute :bathrooms, Float, :from => :bath_rooms
+
+    def self.new(attributes)
+      attributes[:square_feet] = attributes.delete :square_footage
+      attributes[:bed_rooms] = attributes.delete :bedrooms
+      attributes[:bathrooms] = attributes.delete :bath_rooms
+
+      super(attributes)
+    end
+
+  end
 end

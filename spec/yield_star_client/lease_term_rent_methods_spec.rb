@@ -13,8 +13,12 @@ module YieldStarClient
     # NOTE: ensure that the units you use have lease term rents set up
     describe "#get_lease_term_rent", vcr: {record: :once} do
       let(:properties) { client.get_properties }
-      let(:external_property_id) { properties.last.external_property_id }
-      let(:floor_plan) { client.get_available_units(external_property_id).last }
+      let(:external_property_id) do
+        properties.last.external_property_id
+      end
+      let(:floor_plan) do
+        client.get_available_units(external_property_id).last
+      end
       let(:unit_number) { unit.unit_number }
       let(:unit) { floor_plan.units.first }
       let(:unit_number_2) { unit_2.unit_number }
