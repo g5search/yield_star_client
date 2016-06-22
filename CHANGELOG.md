@@ -1,3 +1,7 @@
+## TBA
+
+* Replace `get_available_units` with `get_floor_plans_with_units`
+
 ## 1.6.1
 
 * Fix typo on yield_star_client_unit factory
