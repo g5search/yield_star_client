@@ -44,22 +44,22 @@ module YieldStarClient
       soap_error_hash = soap_error.to_hash[:fault]
       detail = soap_error_hash[:detail]
 
-      error_class = if detail && detail.has_key?(:authentication_fault)
+      return YieldStarClient::ServerError.new(
+        soap_error_hash[:faultstring], soap_error_hash[:faultcode]
+      ) unless detail
+
+      error_class = if detail.has_key?(:authentication_fault)
         message = detail[:authentication_fault][:message]
         code = detail[:authentication_fault][:code]
         YieldStarClient::AuthenticationError.new(message, code)
-      elsif detail && detail.has_key?(:operation_fault)
+      elsif detail.has_key?(:operation_fault)
         message = detail[:operation_fault][:message]
         code = detail[:operation_fault][:code]
         YieldStarClient::OperationError.new(message, code)
-      elsif detail && detail.has_key?(:internal_error_fault)
+      elsif detail.has_key?(:internal_error_fault)
         message = detail[:internal_error_fault][:message]
         code = detail[:internal_error_fault][:code]
         YieldStarClient::InternalError.new(message, code)
-      else
-        message = soap_error_hash[:faultstring]
-        code = soap_error_hash[:faultcode]
-        YieldStarClient::ServerError.new(message, code)
       end
     end
   end
