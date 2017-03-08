@@ -1,3 +1,7 @@
+## 3.1
+
+* Add Savon::HTTPError to errors to be rescued and make message better
+
 ## 3.0
 
 * Use `get_rent_summary` to build Floorplans
