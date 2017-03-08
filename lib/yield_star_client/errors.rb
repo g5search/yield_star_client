@@ -17,27 +17,50 @@ module YieldStarClient
     #
     # @param [Savon::SOAP::Fault] soap_error the error object raised by the soap client
     # @return [YieldStarClient::ServerError] the corresponding YieldStarClient error
-    def self.translate_fault(soap_error)
-      fault = soap_error.to_hash[:fault]
-
-      # set up defaults
-      error_class = YieldStarClient::ServerError
-      fault_detail = {:code => fault[:faultcode], :message => fault[:faultstring]}
-
-      if detail = fault[:detail]
-        if detail.has_key?(:authentication_fault)
-          error_class = YieldStarClient::AuthenticationError
-          fault_detail = detail[:authentication_fault]
-        elsif detail.has_key?(:operation_fault)
-          error_class = YieldStarClient::OperationError
-          fault_detail = detail[:operation_fault]
-        elsif detail.has_key?(:internal_error_fault)
-          error_class = YieldStarClient::InternalError
-          fault_detail = detail[:internal_error_fault]
-        end
+    def self.translate_fault(error)
+      if error.instance_of? Savon::HTTPError
+        http_build_error_object(error)
+      elsif error.instance_of? Savon::SOAPFault
+        soap_build_error_object(error)
       end
+    end
 
-      error_class.new(fault_detail[:message], fault_detail[:code])
+    private
+
+    def self.http_build_error_object(http_error)
+      http_error_hash = http_error.to_hash
+      code = http_error_hash[:code]
+      body = http_error_hash[:body]
+
+      case code
+      when 401
+        YieldStarClient::AuthenticationError.new("Authentication Error", code)
+      else
+        YieldStarClient::ServerError.new(body, code)
+      end
+    end
+
+    def self.soap_build_error_object(soap_error)
+      soap_error_hash = soap_error.to_hash[:fault]
+      detail = soap_error_hash[:detail]
+
+      return YieldStarClient::ServerError.new(
+        soap_error_hash[:faultstring], soap_error_hash[:faultcode]
+      ) unless detail
+
+      error_class = if detail.has_key?(:authentication_fault)
+        message = detail[:authentication_fault][:message]
+        code = detail[:authentication_fault][:code]
+        YieldStarClient::AuthenticationError.new(message, code)
+      elsif detail.has_key?(:operation_fault)
+        message = detail[:operation_fault][:message]
+        code = detail[:operation_fault][:code]
+        YieldStarClient::OperationError.new(message, code)
+      elsif detail.has_key?(:internal_error_fault)
+        message = detail[:internal_error_fault][:message]
+        code = detail[:internal_error_fault][:code]
+        YieldStarClient::InternalError.new(message, code)
+      end
     end
   end
 

@@ -60,87 +60,118 @@ describe YieldStarClient::ServerError do
   describe ".translate_fault" do
     subject { YieldStarClient::ServerError.translate_fault(fault) }
 
-    let(:fault) do
-      double(
-        Savon::SOAPFault,
-        to_hash: {
-          fault: {
-            faultstring: faultstring,
-            faultcode: faultcode,
-            detail: {
-              fault_type => {
-                message: faultstring,
-                code: faultcode,
-              },
+    context "on Savon::SOAPFault error" do
+
+      let(:fault) do
+        double(
+          Savon::SOAPFault,
+          to_hash: {
+            fault: {
+              faultstring: faultstring,
+              faultcode: faultcode,
+              detail: {
+                fault_type => {
+                  message: faultstring,
+                  code: faultcode,
+                },
+              }
             }
           }
-        }
-      )
+        )
+      end
+
+      before(:each) do
+        allow(fault).to receive(:instance_of?).with(Savon::HTTPError).and_return false
+        allow(fault).to receive(:instance_of?).with(Savon::SOAPFault).and_return true
+      end
+
+      context "for an authentication fault" do
+        # let(:response) { mock() { stubs(:body).returns(Savon::Spec::Fixture[:faults, :authentication_fault]) } }
+        let(:faultstring) {"Client [foo] not found for this user [12e7e719764-21c]"}
+        let(:faultcode) { "12e7e719764-21c" }
+        let(:fault_type) { :authentication_fault }
+
+        it { should be_a YieldStarClient::AuthenticationError }
+
+        it "has the correct message" do
+          expect(subject.message).to eq faultstring
+        end
+
+        it "has the correct code" do
+          expect(subject.code).to eq faultcode
+        end
+      end
+
+      context "for an internal error fault" do
+        let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
+        let(:faultcode) { '12e7cfbb782-37a' }
+        let(:fault_type) { :internal_error_fault }
+
+        it { should be_a YieldStarClient::InternalError }
+
+        it "has the correct message" do
+          expect(subject.message).to eq faultstring
+        end
+
+        it "has the correct message" do
+          expect(subject.code).to eq faultcode
+        end
+      end
+
+      context "for an operation fault" do
+        let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
+        let(:faultcode) { '12e7cfbb782-37a' }
+        let(:fault_type) { :operation_fault }
+
+        it { should be_a YieldStarClient::OperationError }
+
+        it "has the correct message" do
+          expect(subject.message).to eq faultstring
+        end
+
+        it "has the correct code" do
+          expect(subject.code).to eq faultcode
+        end
+      end
+
+      context "for a generic fault" do
+        let(:faultstring) {'java.lang.NullPointerException'}
+        let(:faultcode) { 'S:Server' }
+        let(:fault_type) { :operation_fault }
+
+        it { should be_a YieldStarClient::ServerError }
+
+        it "has the correct message" do
+          expect(subject.message).to eq faultstring
+        end
+
+        it "has the correct code" do
+          expect(subject.code).to eq faultcode
+        end
+      end
     end
-    
-    context "for an authentication fault" do
-      # let(:response) { mock() { stubs(:body).returns(Savon::Spec::Fixture[:faults, :authentication_fault]) } }
-      let(:faultstring) {"Client [foo] not found for this user [12e7e719764-21c]"}
-      let(:faultcode) { "12e7e719764-21c" }
-      let(:fault_type) { :authentication_fault }
 
-      it { should be_a YieldStarClient::AuthenticationError }
-
-      it "has the correct message" do
-        expect(subject.message).to eq faultstring
+    context "on Savon::HTTPError error" do
+      let(:fault) do
+        double(
+          Savon::HTTPError,
+          to_hash: {
+            code: 401,
+            message: "Username and password are wrong"
+          }
+        )
       end
 
-      it "has the correct code" do
-        expect(subject.code).to eq faultcode
-      end
-    end
+      context "for an authentication fault" do
+        let(:fault_type) { :authentication_fault }
 
-    context "for an internal error fault" do
-      let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
-      let(:faultcode) { '12e7cfbb782-37a' }
-      let(:fault_type) { :internal_error_fault }
-
-      it { should be_a YieldStarClient::InternalError }
-
-      it "has the correct message" do
-        expect(subject.message).to eq faultstring
+        it "has the correct message" do
+          allow(fault).to receive(:instance_of?).with(Savon::HTTPError).and_return true
+          expect(subject.message).to eq "Authentication Error"
+          expect(subject).to be_a YieldStarClient::AuthenticationError
+        end
       end
 
-      it "has the correct message" do
-        expect(subject.code).to eq faultcode
-      end
-    end
-
-    context "for an operation fault" do
-      let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
-      let(:faultcode) { '12e7cfbb782-37a' }
-      let(:fault_type) { :operation_fault }
-
-      it { should be_a YieldStarClient::OperationError }
-
-      it "has the correct message" do
-        expect(subject.message).to eq faultstring
-      end
-
-      it "has the correct code" do
-        expect(subject.code).to eq faultcode
-      end
-    end
-
-    context "for a generic fault" do
-      let(:faultstring) {'java.lang.NullPointerException'}
-      let(:faultcode) { 'S:Server' }
-      let(:fault_type) { :operation_fault }
-
-      it { should be_a YieldStarClient::ServerError }
-
-      it "has the correct message" do
-        expect(subject.message).to eq faultstring
-      end
-
-      it "has the correct code" do
-        expect(subject.code).to eq faultcode
-      end
     end
   end
 end
