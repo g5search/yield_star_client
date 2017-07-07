@@ -15,7 +15,6 @@ module YieldStarClient
     validates(
       :client_name,
       :endpoint,
-      :namespace,
       :username,
       :password,
       presence: true,

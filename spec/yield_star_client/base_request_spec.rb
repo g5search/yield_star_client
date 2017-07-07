@@ -8,7 +8,6 @@ module YieldStarClient
 
       it { is_expected.to have_attribute(:client_name, String) }
       it { is_expected.to have_attribute(:endpoint, String) }
-      it { is_expected.to have_attribute(:namespace, String) }
       it { is_expected.to have_attribute(:username, String) }
       it { is_expected.to have_attribute(:password, String) }
       it { is_expected.to have_attribute(:logger) }
@@ -20,7 +19,6 @@ module YieldStarClient
 
       it { is_expected.to validate_presence_of(:client_name) }
       it { is_expected.to validate_presence_of(:endpoint) }
-      it { is_expected.to validate_presence_of(:namespace) }
       it { is_expected.to validate_presence_of(:username) }
       it { is_expected.to validate_presence_of(:password) }
 
