@@ -6,8 +6,9 @@ module YieldStarClient
         fetch(:soap_wrapper_element)
       soap_unit_element = soap_hash_accessors.fetch(:soap_unit_element)
 
-      return_element = soap_response.
-        to_hash[soap_wrapper_element][:return]
+      lease_term_node = soap_response.to_hash[soap_wrapper_element]
+      return [] if lease_term_node.nil?
+      return_element = lease_term_node[:return]
 
       external_property_id = return_element[:external_property_id]
 
