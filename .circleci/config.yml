@@ -1,0 +1,60 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.3.7-node
+        environment:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+
+    working_directory: ~/g5search/yield-star-client
+
+    steps:
+      - checkout
+
+      - run:
+          name: Prepare spec/config.yml
+          command: cp spec/config.yml{.sample,}
+
+      # Show bundler version
+      - run:
+          name: Bundler Version?
+          command: bundle -v
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-yield-star-client-test-{{ checksum "Gemfile.lock" }}
+          - v1-yield-star-client-test-
+
+      - run:
+          name: Installing dependencies
+          command: |
+            bundle install
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-yield-star-client-test-{{ checksum "Gemfile.lock" }}
+
+      # run tests!
+      - run:
+          name: Running RSpec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+
+            bundle exec rspec --colour --order rand --format progress $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
