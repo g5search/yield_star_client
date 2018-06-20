@@ -22,7 +22,7 @@ module YieldStarClient
         }
       end
 
-      before(:all) do
+      before do
         savon.mock!
 
         savon.expects(:get_available_units)
@@ -34,7 +34,7 @@ module YieldStarClient
           .returns(fixture)
       end
 
-      after(:all) { savon.unmock! }
+      after { savon.unmock! }
 
       describe "#available_units" do
         it "returns an array of AvailableUnit objects" do

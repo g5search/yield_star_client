@@ -8,6 +8,7 @@ module YieldStarClient
       :logger,
       :username,
       :password,
+      :ssl_version,
     ]
 
     def self.request(action, params)

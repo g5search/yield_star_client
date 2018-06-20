@@ -85,6 +85,7 @@ module YieldStarClient
     # @option options [String] :client_name The YieldStar client name (required for all requests)
     # @option options [String] :endpoint The address for connecting to the web service.
     # @option options [String] :namespace The XML namespace to use for requests.
+    # @option options [Symbol] :ssl_version The TLS version used for secure connections
     # @option options [true,false] :debug true to enable debug logging of SOAP traffic; defaults to false
     def initialize(options={})
       options.each { |k,v| self.send("#{k}=", v) if self.respond_to?("#{k}=") }
@@ -121,6 +122,7 @@ module YieldStarClient
         basic_auth: [self.username.to_s, self.password.to_s],
         log: debug?,
         logger: get_value(:logger),
+        ssl_version: self.ssl_version,
       )
     end
 
@@ -145,6 +147,7 @@ module YieldStarClient
         password: self.password,
         log: self.debug?,
         logger: self.logger,
+        ssl_version: self.ssl_version,
       }
     end
   end
