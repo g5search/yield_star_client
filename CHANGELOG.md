@@ -1,4 +1,4 @@
-## 3.2.0.alpha
+## 3.2.0
 
 * Use TLS version 1.2
 
