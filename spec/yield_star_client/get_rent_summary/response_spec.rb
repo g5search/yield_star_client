@@ -22,7 +22,7 @@ module YieldStarClient
         }
       end
 
-      before(:all) do
+      before do
         savon.mock!
 
         savon.expects(:get_rent_summary)
@@ -34,7 +34,7 @@ module YieldStarClient
           .returns(fixture)
       end
 
-      after(:all) { savon.unmock! }
+      after { savon.unmock! }
 
       describe "#rent_summaries_as_floor_plans" do
         it "returns an array of FloorPlan objects" do

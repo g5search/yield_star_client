@@ -1,3 +1,7 @@
+## 3.2.0.alpha
+
+* Use TLS version 1.2
+
 ## 3.1
 
 * Add Savon::HTTPError to errors to be rescued and make message better

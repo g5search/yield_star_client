@@ -10,6 +10,7 @@ module YieldStarClient
       let(:endpoint) { "http://endpoint.com" }
       let(:namespace) { "http://endpoint.com/v1" }
       let(:action) { :some_soap_action }
+      let(:ssl_version) { :TLSv1_2 }
 
       let(:params) do
         {
@@ -20,6 +21,7 @@ module YieldStarClient
           namespace: namespace,
           log: true,
           logger: logger,
+          ssl_version: ssl_version,
           other: "opt",
           another: "param",
         }
@@ -33,6 +35,7 @@ module YieldStarClient
           basic_auth: ["asd", "123"],
           log: true,
           logger: logger,
+          ssl_version: ssl_version,
         ).and_return(savon_client)
 
         savon_message = {

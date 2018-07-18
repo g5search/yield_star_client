@@ -32,7 +32,7 @@ module YieldStarClient
 
     describe "#request_args" do
       it "removes any keys with nil values" do
-        request = described_class.new(client_name: nil, username: "Ok")
+        request = described_class.new(client_name: nil, username: "Ok", ssl_version: nil)
         expect(request.request_args).to eq(username: "Ok")
       end
     end
