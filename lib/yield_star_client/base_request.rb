@@ -10,6 +10,7 @@ module YieldStarClient
     attribute :username, String
     attribute :password, String
     attribute :logger
+    attribute :ssl_version, Symbol, default: :TLSv1_2
     attribute :log, Boolean
 
     validates(
@@ -17,6 +18,7 @@ module YieldStarClient
       :endpoint,
       :username,
       :password,
+      :ssl_version,
       presence: true,
     )
     validates :client_name, length: {maximum: 16}
