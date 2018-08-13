@@ -35,4 +35,4 @@ Sensible defaults are provided for other configuration options. **TODO**: link t
 
  [rubygems]: http://rubygems.org/gems/yield_star_client
  [yieldstar-docs]: http://rmsws.yieldstar.com/rmsws/doc/AppExchange/index.html
- [yieldstar-wsdl]: http://rmsws.yieldstar.com/rmsws/AppExchange?wsdl
+ [yieldstar-wsdl]: https://rmsws.yieldstar.com/rmsws/AppExchange?wsdl
