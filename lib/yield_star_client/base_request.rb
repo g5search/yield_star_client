@@ -10,6 +10,7 @@ module YieldStarClient
     attribute :username, String
     attribute :password, String
     attribute :logger
+    attribute :ssl_version, Symbol, default: :TLSv1_2
     attribute :log, Boolean
 
     validates(

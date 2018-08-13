@@ -126,6 +126,7 @@ module YieldStarClient
         basic_auth: [self.username.to_s, self.password.to_s],
         log: debug?,
         logger: get_value(:logger),
+        ssl_version: self.ssl_version,
       )
     end
 
@@ -150,6 +151,7 @@ module YieldStarClient
         password: self.password,
         log: self.debug?,
         logger: self.logger,
+        ssl_version: self.ssl_version,
       }
     end
   end

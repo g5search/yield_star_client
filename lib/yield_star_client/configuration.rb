@@ -6,10 +6,11 @@ module YieldStarClient
   #
   # @see YieldStarClient.configure
   VALID_CONFIG_OPTIONS = [:endpoint, :username, :password, :namespace, :client_name,
-                          :debug, :logger]
+                          :debug, :logger, :ssl_version]
 
   DEFAULT_ENDPOINT = 'https://rmsws.yieldstar.com/rmsws/AppExchange'
   DEFAULT_NAMESPACE = 'http://yieldstar.com/ws/AppExchange/v1'
+  DEFAULT_SSL_VERSION = :TLSv1_2
 
   module Configuration
     include Configlet
@@ -19,6 +20,7 @@ module YieldStarClient
       base.config :yield_star do
         default :endpoint => DEFAULT_ENDPOINT
         default :namespace => DEFAULT_NAMESPACE
+        default :ssl_version => DEFAULT_SSL_VERSION
         default :debug => false
       end
     end
@@ -48,7 +50,7 @@ module YieldStarClient
     end
 
     # Configures this module through the given +block+.
-    # Default configuration options will be applied unless 
+    # Default configuration options will be applied unless
     # they are explicitly overridden in the +block+.
     #
     # @yield [_self] configures service connection options
