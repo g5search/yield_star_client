@@ -1,3 +1,8 @@
+## 1.0.0.beta.3
+
+*Setting  ssl version to TLS 1.2 due to deprecation by yieldstar of previous versions.
+*Endpoint needs to be https
+
 ## 1.0.0.beta.2
 
 * Fix bug when fetching lease terms - Invalid building/unit XXXXXX
