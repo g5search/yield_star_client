@@ -1,3 +1,15 @@
+machine:
+  post:
+    - rvm install 1.9 --patch https://gist.githubusercontent.com/kriansa/dd1b9a0d8dfec776fc91/raw/4065d5a08e75e1f071dadeabf5a85b43de6bfad4/openssl_tls_1.2.patch
+    - rvm --default use 1.9.3-p551
+  ruby:
+    version:
+      1.9.3-p551
+
 checkout:
   post:
     - cp spec/config.yml{.sample,}
+
+dependencies:
+  cache_directories:
+    - ~/rvm_binaries
