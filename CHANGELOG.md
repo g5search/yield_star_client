@@ -1,3 +1,8 @@
+## v0.3.1
+
+*Change default vendor endpoints to https protocol scheme
+*Make endpoints a configurable variable
+
 ## 0.3.0
 
 * Add RentSummary override attributes for bedroom and bathroom counts
