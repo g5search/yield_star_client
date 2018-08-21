@@ -1,3 +1,7 @@
+## 3.2.1
+
+* Change endpoint to https
+
 ## 3.2.0
 
 * Use TLS version 1.2
