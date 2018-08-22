@@ -9,7 +9,7 @@ module YieldStarClient
                           :debug, :logger, :ssl_version]
 
   DEFAULT_ENDPOINT = 'https://rmsws.yieldstar.com/rmsws/AppExchange'
-  DEFAULT_NAMESPACE = 'http://yieldstar.com/ws/AppExchange/v1'
+  DEFAULT_NAMESPACE = 'https://yieldstar.com/ws/AppExchange/v1'
   DEFAULT_SSL_VERSION = :TLSv1_2
 
   module Configuration
