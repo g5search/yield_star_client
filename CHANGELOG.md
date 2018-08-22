@@ -1,3 +1,7 @@
+## 1.0.0
+
+* fixes wsdl endpoint
+
 ## 1.0.0.beta.3
 
 *Setting  ssl version to TLS 1.2 due to deprecation by yieldstar of previous versions.
