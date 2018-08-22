@@ -2,5 +2,4 @@ BaseImageTag: "2.3-v1.0.0"
 DisableYarn: true
 PreBundle: |-
   COPY spec/config.yml.sample /app/spec/config.yml
-  COPY yield_star_client.gemspec /app/yield_star_client.gemspec
   COPY lib/yield_star_client/version.rb /app/lib/yield_star_client/version.rb
