@@ -8,8 +8,8 @@ module YieldStarClient
   VALID_CONFIG_OPTIONS = [:endpoint, :username, :password, :namespace, :client_name,
                           :debug, :logger, :ssl_version]
 
-  DEFAULT_ENDPOINT = 'https://rmsws.yieldstar.com/rmsws/AppExchange'
-  DEFAULT_NAMESPACE = 'https://yieldstar.com/ws/AppExchange/v1'
+  DEFAULT_ENDPOINT = ENV.fetch("YIELD_STAR_ENDPOINT", 'https://rmsws.yieldstar.com/rmsws/AppExchange').freeze
+  DEFAULT_NAMESPACE = ENV.fetch("YIELD_STAR_NAMESPACE", 'http://yieldstar.com/ws/AppExchange/v1').freeze
   DEFAULT_SSL_VERSION = :TLSv1_2
 
   module Configuration
