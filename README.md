@@ -102,4 +102,4 @@ client.get_lease_term_rent(
 
  [rubygems]: http://rubygems.org/gems/yield_star_client
  [yieldstar-docs]: https://rmsws.yieldstar.com/rmsws/doc/AppExchange/index.html
- [yieldstar-wsdl]: https://rmsws.yieldstar.com/rmsws/AppExchange?wsdl
+ [yieldstar-wsdl]: http://rmsws.yieldstar.com/rmsws/AppExchange?wsdl
