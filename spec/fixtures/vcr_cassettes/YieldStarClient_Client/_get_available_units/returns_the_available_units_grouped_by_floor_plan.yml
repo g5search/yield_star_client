@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: http://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
+    uri: https://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -141,7 +141,7 @@ http_interactions:
   recorded_at: Wed, 22 Jun 2016 01:55:10 GMT
 - request:
     method: post
-    uri: http://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
+    uri: https://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -181,7 +181,7 @@ http_interactions:
   recorded_at: Wed, 22 Jun 2016 01:55:11 GMT
 - request:
     method: post
-    uri: http://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
+    uri: https://<USERNAME>:<PASSWORD>@rmsws.yieldstar.com/rmsws/AppExchange
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
