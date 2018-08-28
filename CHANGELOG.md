@@ -6,6 +6,10 @@
 
 * Use TLS version 1.2
 
+## TBD (3.1.2)
+
+* Update `circle.yml` to version 2.0
+
 ## 3.1
 
 * Add Savon::HTTPError to errors to be rescued and make message better
