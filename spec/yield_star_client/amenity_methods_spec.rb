@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe Client do
-
     include Savon::SpecHelper
 
     let(:logger) { Logger.new("tmp/test.log") }
@@ -17,6 +16,7 @@ module YieldStarClient
 
     describe "#get_floor_plan_amenities" do
       before(:all) { savon.mock! }
+
       after(:all) { savon.unmock! }
 
       let(:fixture) do
@@ -31,11 +31,11 @@ module YieldStarClient
 
       it "returns floor plan amenities", vcr: {record: :once} do
         expected_message = client_config.
-          slice(:client_name).
-          merge(
-            external_property_id: "external_property_id",
-            floor_plan_name: "floor_plan_name",
-          )
+                           slice(:client_name).
+                           merge(
+                             external_property_id: "external_property_id",
+                             floor_plan_name: "floor_plan_name",
+                           )
 
         savon.expects(:get_floor_plan_amenities).
           with(message: {request: expected_message.symbolize_keys}).
@@ -100,7 +100,8 @@ module YieldStarClient
           throw :amenities, []
         end
 
-        fail "Unable to find any amenities" if amenities.empty?
+        raise "Unable to find any amenities" if amenities.empty?
+
         expect(amenities.first).to be_an Amenity
       end
     end
@@ -129,6 +130,5 @@ module YieldStarClient
         "building",
       )
     end
-
   end
 end

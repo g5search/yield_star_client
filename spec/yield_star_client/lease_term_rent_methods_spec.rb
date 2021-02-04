@@ -1,13 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe Client do
-
     let(:client) do
       described_class.new(CONFIG.merge(
-        debug: true,
-        logger: Logger.new("tmp/test.log"),
-      ))
+                            debug: true,
+                            logger: Logger.new("tmp/test.log"),
+                          ))
     end
 
     describe "#get_lease_term_rent", vcr: { record: :once } do
@@ -39,11 +38,11 @@ module YieldStarClient
                 building: unit_2.building,
                 first_move_in_date: date_tomorrow.to_s,
                 last_move_in_date: (date_tomorrow + 45).to_s,
-              }
-            ]
+              },
+            ],
           )
 
-          expect(lease_term_rents).to_not be_empty
+          expect(lease_term_rents).not_to be_empty
           expect(lease_term_rents.first).to be_a LeaseTermRent
         end
       end
@@ -64,7 +63,7 @@ module YieldStarClient
                 first_move_in_date: Date.today.to_s,
                 last_move_in_date: Date.today.to_s,
               },
-            ]
+            ],
           )
 
           expect(lease_term_rents).to be_empty

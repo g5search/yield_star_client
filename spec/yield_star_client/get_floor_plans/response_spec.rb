@@ -14,8 +14,8 @@ module YieldStarClient
                   square_footage: "20",
                   bed_rooms: "1.5",
                   bath_rooms: "2.5",
-                }
-              ]
+                },
+              ],
             )
 
           result = described_class.new(any_args)
@@ -37,9 +37,9 @@ module YieldStarClient
                     external_property_id: "external_property_id",
                     floor_plan_name: "floor_plan_name",
                     floor_plan: nil,
-                  }
-                }
-              }
+                  },
+                },
+              },
             )
           end
 
@@ -59,9 +59,9 @@ module YieldStarClient
                     external_property_id: "external_property_id",
                     floor_plan_name: "floor_plan_name",
                     floor_plan: floor_plan_attributes,
-                  }
-                }
-              }
+                  },
+                },
+              },
             )
           end
           let(:floor_plan_attributes) do
@@ -90,9 +90,9 @@ module YieldStarClient
                       floor_plan_attributes_1,
                       floor_plan_attributes_2,
                     ],
-                  }
-                }
-              }
+                  },
+                },
+              },
             )
           end
           let(:floor_plan_attributes_1) do
@@ -116,7 +116,6 @@ module YieldStarClient
           end
         end
       end
-
     end
   end
 end

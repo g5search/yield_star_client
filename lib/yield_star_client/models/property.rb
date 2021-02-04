@@ -25,10 +25,10 @@ module YieldStarClient
     property :zip
     property :fax
     property :phone
-    property :latitude, :type => Float
-    property :longitude, :type => Float
-    property :unit_count, :type => Integer
+    property :latitude, type: Float
+    property :longitude, type: Float
+    property :unit_count, type: Integer
     property :website
-    property :year_built, :type => Integer
+    property :year_built, type: Integer
   end
 end

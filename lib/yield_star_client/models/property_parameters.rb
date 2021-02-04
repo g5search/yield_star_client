@@ -12,7 +12,6 @@ module YieldStarClient
   # @attr [Integer] min_renewal_lease_term minimum length (in months) of a renewal lease term
   # @attr [Integer] max_renewal_lease_term maximum length (in months) of a renewal lease term
   class PropertyParameters
-
     include Virtus.model
 
     attribute :external_property_id, String
@@ -30,11 +29,11 @@ module YieldStarClient
 
       params.each do |param|
         key = param[:name].downcase.gsub(/(max|min)imum/, '\1').
-          gsub(/\s+/, '_').to_sym
+              gsub(/\s+/, "_").to_sym
         resulting_hash[key] = param[:value]
       end
 
-      self.new(resulting_hash)
+      new(resulting_hash)
     end
   end
 end

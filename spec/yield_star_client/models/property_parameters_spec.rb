@@ -2,9 +2,9 @@ require "spec_helper"
 
 module YieldStarClient
   describe PropertyParameters do
-
     context "attributes" do
       subject { described_class }
+
       it { is_expected.to have_attribute(:external_property_id, String) }
       it { is_expected.to have_attribute(:post_date, Date) }
       it { is_expected.to have_attribute(:min_new_lease_term, Integer) }
@@ -22,7 +22,7 @@ module YieldStarClient
         it "instantiates a PropertyParameters object from the hash" do
           property_parameters = double
           expect(described_class).to receive(:new).with(
-            external_property_id: "external_property_id"
+            external_property_id: "external_property_id",
           ).and_return(property_parameters)
           expect(described_class.new_from(raw_hash)).to eq property_parameters
         end
@@ -41,7 +41,7 @@ module YieldStarClient
                 name: "Minimum New Lease Term",
                 value: "1",
               },
-            ]
+            ],
           }
         end
 
@@ -63,7 +63,7 @@ module YieldStarClient
             parameter: {
               name: "Maximum Renewal Lease Term",
               value: "15",
-            }
+            },
           }
         end
 
@@ -77,6 +77,5 @@ module YieldStarClient
         end
       end
     end
-
   end
 end

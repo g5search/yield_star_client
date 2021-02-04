@@ -1,5 +1,5 @@
-require 'yield_star_client/validations'
-require 'modelish'
+require "yield_star_client/validations"
+require "modelish"
 
 module YieldStarClient
   module UnitMethods
@@ -19,9 +19,9 @@ module YieldStarClient
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
     def get_unit(external_property_id, unit_name, building_name=nil)
       validate_external_property_id!(external_property_id)
-      validate_required!(:unit_name => unit_name)
+      validate_required!(unit_name: unit_name)
 
-      body = {:external_property_id => external_property_id, :name => unit_name}
+      body = {external_property_id: external_property_id, name: unit_name}
       body[:building] = building_name if building_name
 
       response = send_soap_request(:get_unit, body)
@@ -40,7 +40,7 @@ module YieldStarClient
     # Retrieves all units for a specific property, optionally filtered by floor plan.
     #
     # @param [optional,String] floor_plan_name the name of the floor plan associated with the units
-    # 
+    #
     # @return [Array<Unit>] a list of unit data
     #
     # @raise [ArgumentError] when a required argument is missing or invalid

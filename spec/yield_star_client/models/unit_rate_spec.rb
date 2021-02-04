@@ -2,9 +2,9 @@ require "spec_helper"
 
 module YieldStarClient
   describe UnitRate do
-
     context "attributes" do
       subject { described_class }
+
       it { is_expected.to have_attribute(:external_property_id, String) }
       it { is_expected.to have_attribute(:building, String) }
       it { is_expected.to have_attribute(:unit_number, String) }
@@ -17,7 +17,8 @@ module YieldStarClient
 
     describe "#best" do
       context "given 'true'" do
-        subject { described_class.new(best: 'true').best }
+        subject { described_class.new(best: "true").best }
+
         it { is_expected.to eq true }
       end
     end
@@ -30,6 +31,5 @@ module YieldStarClient
         described_class.new_from({})
       end
     end
-
   end
 end

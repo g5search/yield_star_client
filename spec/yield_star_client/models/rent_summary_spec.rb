@@ -2,9 +2,9 @@ require "spec_helper"
 
 module YieldStarClient
   describe RentSummary do
-
     context "attributes" do
       subject { described_class }
+
       it { is_expected.to have_attribute(:effective_date, Date) }
       it { is_expected.to have_attribute(:external_property_id, String) }
       it { is_expected.to have_attribute(:floor_plan_name, String) }
@@ -37,9 +37,9 @@ module YieldStarClient
       end
     end
 
-    describe '#bedrooms_override_from_unit_type and #bathrooms_override_from_unit_type' do
+    describe "#bedrooms_override_from_unit_type and #bathrooms_override_from_unit_type" do
       context "unit_type is composed of two dimensions separated by an 'x' character" do
-        let(:unit_type) { '3.5x2' }
+        let(:unit_type) { "3.5x2" }
         let(:rent_summary) { RentSummary.new(unit_type: unit_type) }
 
         it "return dimensions extracted from the unit_type" do
@@ -48,6 +48,5 @@ module YieldStarClient
         end
       end
     end
-
   end
 end

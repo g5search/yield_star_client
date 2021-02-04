@@ -2,7 +2,6 @@ require "spec_helper"
 
 module YieldStarClient
   describe SoapClient do
-
     describe ".request" do
       let(:savon_client) { double(::Savon::Client) }
       let(:soap_response) { double }
@@ -32,7 +31,7 @@ module YieldStarClient
           element_form_default: :qualified,
           endpoint: endpoint,
           namespace: namespace,
-          basic_auth: ["asd", "123"],
+          basic_auth: %w[asd 123],
           log: true,
           logger: logger,
           ssl_version: ssl_version,
@@ -45,7 +44,7 @@ module YieldStarClient
         }
         expect(savon_client).to receive(:call).with(
           action,
-          message: { request: savon_message }
+          message: { request: savon_message },
         ).and_return(soap_response)
 
         expect(described_class.request(action, params)).to eq soap_response
@@ -72,11 +71,10 @@ module YieldStarClient
             with(savon_error).
             and_return(expected_error)
 
-          expect{ described_class.request(action, params) }.
+          expect { described_class.request(action, params) }.
             to raise_error(expected_error)
         end
       end
     end
-
   end
 end

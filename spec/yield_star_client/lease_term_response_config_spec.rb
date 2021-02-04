@@ -11,6 +11,10 @@ module YieldStarClient
       )
     end
 
+    subject(:resulting_lease_term_rents) do
+      FakeResponse.new(soap_response).send(accessor_method)
+    end
+
     let(:accessor_method) { :lease_term_rents }
     let(:result_class) { LeaseTermRent }
 
@@ -42,16 +46,11 @@ module YieldStarClient
         and_return(lease_term_rent_2)
     end
 
-    subject(:resulting_lease_term_rents) do
-      FakeResponse.new(soap_response).send(accessor_method)
-    end
-
     it "returns lease term rents" do
       expect(resulting_lease_term_rents).to eq([
-        lease_term_rent_1,
-        lease_term_rent_2,
-      ])
+                                                 lease_term_rent_1,
+                                                 lease_term_rent_2,
+                                               ])
     end
-
   end
 end

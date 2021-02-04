@@ -2,6 +2,7 @@ require "spec_helper"
 
 module YieldStarClient
   describe ExtractRentSummaryHashes, ".execute" do
+    subject { described_class.execute(response_hash) }
 
     let(:effective_date) { Date.new(2018, 2, 1) }
     let(:response_hash) do
@@ -11,15 +12,14 @@ module YieldStarClient
             external_property_id: "external_property_id",
             effective_date: effective_date,
             floor_plan_unit_type: floor_plan_unit_type,
-          }
-        }
+          },
+        },
       }
     end
 
-    subject { described_class.execute(response_hash) }
-
     context "there is no floor_plan_unit_type" do
       let(:floor_plan_unit_type) { nil }
+
       it { is_expected.to eq [] }
     end
 
@@ -30,9 +30,10 @@ module YieldStarClient
           floor_plan_unit_type.merge(
             external_property_id: "external_property_id",
             effective_date: effective_date,
-          )
+          ),
         ]
       end
+
       it { is_expected.to eq expected_array }
     end
 
@@ -54,11 +55,11 @@ module YieldStarClient
             external_property_id: "external_property_id",
             effective_date: effective_date,
             unit_type: "type 2",
-          }
+          },
         ]
       end
+
       it { is_expected.to eq expected_array }
     end
-
   end
 end

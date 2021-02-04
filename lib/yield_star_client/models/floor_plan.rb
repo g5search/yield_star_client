@@ -1,6 +1,5 @@
 module YieldStarClient
   class FloorPlan
-
     include ::Virtus.model
 
     attribute :external_property_id, String
@@ -29,11 +28,9 @@ module YieldStarClient
           name: floorplan_id,
           square_feet: square_feet,
           bedrooms: bedrooms,
-          bathrooms: bathrooms
-        )
+          bathrooms: bathrooms,
+        ),
       )
     end
-
   end
-
 end

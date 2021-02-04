@@ -1,7 +1,6 @@
 module YieldStarClient
   module GetRentSummary
     class Response < BaseResponse
-
       def rent_summaries_as_floor_plans
         return @floorplans if @floorplans
 
@@ -18,7 +17,6 @@ module YieldStarClient
       def extract_rent_summary_hashes_from(soap_response)
         ExtractRentSummaryHashes.execute(soap_response)
       end
-
     end
   end
 end

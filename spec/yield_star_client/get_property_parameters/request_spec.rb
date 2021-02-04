@@ -2,8 +2,7 @@ require "spec_helper"
 
 module YieldStarClient
   module GetPropertyParameters
-    describe Request do
-
+    describe Request, type: :model do
       context "attributes" do
         subject { described_class }
 
@@ -20,7 +19,6 @@ module YieldStarClient
       it "has the correct SOAP_ACTION" do
         expect(described_class::SOAP_ACTION).to eq :get_property_parameters
       end
-
     end
   end
 end

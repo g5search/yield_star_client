@@ -3,8 +3,9 @@ require "spec_helper"
 module YieldStarClient
   module GetUnits
     describe Response do
-
       describe "#units" do
+        subject { described_class.new(soap_response).units }
+
         let(:soap_response) do
           double(
             to_hash: {
@@ -13,16 +14,15 @@ module YieldStarClient
                   external_property_id: "external_property_id",
                   floor_plan_name: "floor_plan_name",
                   unit: unit_response,
-                }
-              }
-            }
+                },
+              },
+            },
           )
         end
 
-        subject { described_class.new(soap_response).units }
-
         context "there are no units" do
           let(:unit_response) { nil }
+
           it { is_expected.to be_empty }
         end
 
@@ -32,10 +32,12 @@ module YieldStarClient
             { external_property_id: "external_property_id" }
           end
           let(:unit_response) { unit_attributes }
+
           before do
             allow(Unit).to receive(:new).with(unit_attributes).
               and_return(unit)
           end
+
           it { is_expected.to eq [unit] }
         end
 
@@ -60,10 +62,10 @@ module YieldStarClient
             allow(Unit).to receive(:new).with(unit_2_attributes).
               and_return(unit_2)
           end
+
           it { is_expected.to eq units }
         end
       end
-
     end
   end
 end

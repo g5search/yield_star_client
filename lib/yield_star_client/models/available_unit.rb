@@ -1,5 +1,4 @@
 module YieldStarClient
-
   # Represents an available unit.
   #
   # @attr [String] building the building for this unit
@@ -29,24 +28,23 @@ module YieldStarClient
     property :building
     property :unit_type
     property :unit_number
-    property :features, :type => Array, :default => [], :from => :feature
-    property :status, :type => Symbol
-    property :date_available, :type => Date
-    property :base_market_rent, :type => Integer
-    property :base_concession, :type => Integer
-    property :base_final_rent, :type => Integer
-    property :best_lease_term, :type => Integer
-    property :best_market_rent, :type => Integer
-    property :best_concession, :type => Integer
-    property :best_final_rent, :type => Integer
+    property :features, type: Array, default: [], from: :feature
+    property :status, type: Symbol
+    property :date_available, type: Date
+    property :base_market_rent, type: Integer
+    property :base_concession, type: Integer
+    property :base_final_rent, type: Integer
+    property :best_lease_term, type: Integer
+    property :best_market_rent, type: Integer
+    property :best_concession, type: Integer
+    property :best_final_rent, type: Integer
 
     def self.new_from_hash(hash)
       new(
         hash.merge(
-          id: hash[:unit_number]
-        )
+          id: hash[:unit_number],
+        ),
       )
     end
   end
-
 end

@@ -3,8 +3,9 @@ require "spec_helper"
 module YieldStarClient
   module GetUnitAmenities
     describe Response do
-
       describe "#amenities" do
+        subject { described_class.new(soap_response).amenities }
+
         let(:soap_response) do
           double(
             to_hash: {
@@ -13,16 +14,15 @@ module YieldStarClient
                   external_property_id: "external_property_id",
                   unit_name: "unit_name",
                   amenity: amenity_response,
-                }
-              }
-            }
+                },
+              },
+            },
           )
         end
 
-        subject { described_class.new(soap_response).amenities }
-
         context "there are no amenities" do
           let(:amenity_response) { nil }
+
           it { is_expected.to be_empty }
         end
 
@@ -32,10 +32,12 @@ module YieldStarClient
             { name: "Rent Adjustment", type: "Fixed", value: 50.0 }
           end
           let(:amenity_response) { amenity_attributes }
+
           before do
             allow(Amenity).to receive(:new).with(amenity_attributes).
               and_return(amenity)
           end
+
           it { is_expected.to eq [amenity] }
         end
 
@@ -60,10 +62,10 @@ module YieldStarClient
             allow(Amenity).to receive(:new).with(amenity_2_attributes).
               and_return(amenity_2)
           end
+
           it { is_expected.to eq amenities }
         end
       end
-
     end
   end
 end

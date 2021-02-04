@@ -1,13 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe Client do
-
     let(:client) do
       described_class.new(CONFIG.merge(
-        debug: true,
-        logger: Logger.new("tmp/test.log"),
-      ))
+                            debug: true,
+                            logger: Logger.new("tmp/test.log"),
+                          ))
     end
 
     describe "#get_floor_plans" do
@@ -21,7 +20,8 @@ module YieldStarClient
           throw :floor_plans, nil
         end
 
-        fail "Could not find floor plans to test" if floor_plans.empty?
+        raise "Could not find floor plans to test" if floor_plans.empty?
+
         expect(floor_plans.first).to be_a FloorPlan
       end
     end
@@ -33,7 +33,7 @@ module YieldStarClient
         floor_plans = client.get_floor_plans(external_property_id)
         floor_plan = client.get_floor_plan(
           external_property_id,
-          floor_plans.first.name
+          floor_plans.first.name,
         )
         expect(floor_plan).to be_a FloorPlan
         expect(floor_plan.external_property_id).to eq external_property_id
@@ -52,7 +52,5 @@ module YieldStarClient
         expect(floor_plan.units.first).to be_an AvailableUnit
       end
     end
-
   end
-
 end

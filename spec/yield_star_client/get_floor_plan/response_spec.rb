@@ -3,7 +3,6 @@ require "spec_helper"
 module YieldStarClient
   module GetFloorPlan
     describe Response do
-
       describe "#floor_plan" do
         let(:soap_response) do
           double(
@@ -11,9 +10,9 @@ module YieldStarClient
               get_floor_plan_response: {
                 return: {
                   floor_plan: floor_plan_attributes,
-                }
-              }
-            }
+                },
+              },
+            },
           )
         end
 
@@ -23,7 +22,7 @@ module YieldStarClient
             name: "name",
             square_footage: 1,
             bed_rooms: 1.5,
-            bath_rooms: 1.5
+            bath_rooms: 1.5,
           }
         end
 
@@ -38,9 +37,7 @@ module YieldStarClient
           expect(result.floor_plan.bedrooms).to eq floor_plan_attributes[:bed_rooms]
           expect(result.floor_plan.bathrooms).to eq floor_plan_attributes[:bath_rooms]
         end
-
       end
-
     end
   end
 end

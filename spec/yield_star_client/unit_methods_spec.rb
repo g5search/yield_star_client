@@ -1,12 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe Client do
     let(:client) do
       described_class.new(CONFIG.merge(
-        debug: true,
-        logger: Logger.new("tmp/test.log"),
-      ))
+                            debug: true,
+                            logger: Logger.new("tmp/test.log"),
+                          ))
     end
 
     describe "#get_units", vcr: {record: :once} do
@@ -54,7 +54,8 @@ module YieldStarClient
           throw :unit, nil
         end
 
-        fail "Could not find a valid unit to test" if unit.nil?
+        raise "Could not find a valid unit to test" if unit.nil?
+
         expect(unit).to be_a Unit
       end
     end

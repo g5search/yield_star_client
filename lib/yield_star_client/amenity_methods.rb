@@ -1,5 +1,5 @@
-require 'yield_star_client/validations'
-require 'modelish'
+require "yield_star_client/validations"
+require "modelish"
 
 module YieldStarClient
   module AmenityMethods
@@ -39,7 +39,7 @@ module YieldStarClient
     # @raise [YieldStarClient::OperationError] when the service raises an OperationError fault
     # @raise [YieldStarClient::InternalError] when the service raises an InternalError fault
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
-    def get_unit_amenities(external_property_id, unit_name, building=nil)
+    def get_unit_amenities(external_property_id, unit_name, building = nil)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
         unit_name: unit_name,

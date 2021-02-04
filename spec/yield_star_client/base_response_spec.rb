@@ -2,7 +2,6 @@ require "spec_helper"
 
 module YieldStarClient
   describe BaseResponse do
-
     describe "initialize" do
       it "sets @soap_response" do
         soap_response = "foo"
@@ -11,6 +10,5 @@ module YieldStarClient
           to eq soap_response
       end
     end
-
   end
 end

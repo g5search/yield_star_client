@@ -1,5 +1,4 @@
 module YieldStarClient
-
   # Represents a summary of rent information for a floor plan/unit type combination.
   #
   # @attr [Date] effective_date the data on which all listed prices are considered effective
@@ -26,13 +25,12 @@ module YieldStarClient
   #                                units in this unit type.
   # @attr [String] floor_plan_description the marketing name of the floor plan
   class RentSummary
-
     include Virtus.model
 
     attribute :effective_date, Date
     attribute :external_property_id, String
     attribute :floor_plan_name, String
-    attribute :unit_type, String, default: ''
+    attribute :unit_type, String, default: ""
     attribute :bedrooms, Float
     attribute :bathrooms, Float
     attribute :avg_square_feet, Integer
@@ -44,18 +42,16 @@ module YieldStarClient
     attribute :min_final_rent, Integer
     attribute :max_final_rent, Integer
     attribute :floor_plan_description, String
-    attribute :bedrooms_override_from_unit_type, Float, default: lambda { |rs, attribute| self.bedrooms_override_from(rs.unit_type) }
-    attribute :bathrooms_override_from_unit_type, Float, default: lambda { |rs, attribute| self.bathrooms_override_from(rs.unit_type) }
+    attribute :bedrooms_override_from_unit_type, Float, default: ->(rs, _attribute) { bedrooms_override_from(rs.unit_type) }
+    attribute :bathrooms_override_from_unit_type, Float, default: ->(rs, _attribute) { bathrooms_override_from(rs.unit_type) }
 
     def self.new_from(args)
       args[:bedrooms] = args.delete(:bed_rooms) unless args[:bedrooms]
       args[:bathrooms] = args.delete(:bath_rooms) unless args[:bathrooms]
       args[:avg_square_feet] = args.delete(:avg_sq_ft) unless args[:avg_square_feet]
 
-      self.new(args)
+      new(args)
     end
-
-    private
 
     def self.bedrooms_override_from(unit_type)
       bed_and_bath_unit_type_split(unit_type)[0].to_f
@@ -66,8 +62,7 @@ module YieldStarClient
     end
 
     def self.bed_and_bath_unit_type_split(unit_type)
-      unit_type.split('x')
+      unit_type.split("x")
     end
   end
-
 end

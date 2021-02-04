@@ -1,18 +1,18 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe YieldStarClient do
   let(:default_endpoint) { YieldStarClient::DEFAULT_ENDPOINT }
   let(:default_namespace) { YieldStarClient::DEFAULT_NAMESPACE }
 
-  let(:endpoint) { 'http://configured.endpoint.com' }
-  let(:username) { 'configured user' }
-  let(:password) { 'configured password' }
-  let(:namespace) { 'http://configured.namespace.com' }
-  let(:client_name) { 'configured client name' }
+  let(:endpoint) { "http://configured.endpoint.com" }
+  let(:username) { "configured user" }
+  let(:password) { "configured password" }
+  let(:namespace) { "http://configured.namespace.com" }
+  let(:client_name) { "configured client name" }
 
   after { YieldStarClient.reset }
 
-  it "should have a version" do
+  it "has a version" do
     subject::VERSION.should be
   end
 
@@ -24,14 +24,14 @@ describe YieldStarClient do
       expect(subject.namespace).to eq default_namespace
       expect(subject.client_name).to be_blank
       expect(subject.logger).to be_an_instance_of Logger
-      expect(subject).to_not be_debug
+      expect(subject).not_to be_debug
     end
   end
 
   describe ".configure" do
     subject { YieldStarClient.configure(&config_block) }
 
-    let(:logger) { double() }
+    let(:logger) { double }
 
     context "with full configuration" do
       let(:config_block) do
@@ -46,7 +46,7 @@ describe YieldStarClient do
         end
       end
 
-      it { should == YieldStarClient }
+      it { is_expected.to eq YieldStarClient }
 
       it "has the correct configuration" do
         expect(subject.endpoint).to eq endpoint
@@ -57,7 +57,7 @@ describe YieldStarClient do
         expect(subject.logger).to eq logger
       end
 
-      it { should be_debug }
+      it { is_expected.to be_debug }
     end
 
     context "with partial configuration" do
@@ -70,7 +70,7 @@ describe YieldStarClient do
         end
       end
 
-      it { should == YieldStarClient }
+      it { is_expected.to eq YieldStarClient }
 
       it "has the correct configuration" do
         expect(subject.endpoint).to eq default_endpoint
@@ -81,11 +81,13 @@ describe YieldStarClient do
         expect(subject.logger).to be_an_instance_of Logger
       end
 
-      it { should be_debug }
+      it { is_expected.to be_debug }
     end
   end
 
   describe ".reset" do
+    subject { YieldStarClient.reset }
+
     before do
       YieldStarClient.configure do |config|
         config.endpoint = endpoint
@@ -98,37 +100,35 @@ describe YieldStarClient do
       end
     end
 
-    let(:logger) { double() }
+    let(:logger) { double }
 
-    subject { YieldStarClient.reset }
-
-    it "should change the endpoint to the default" do
-      expect { subject }.to change{YieldStarClient.endpoint}.from(endpoint).to(default_endpoint)
+    it "changes the endpoint to the default" do
+      expect { subject }.to change(YieldStarClient, :endpoint).from(endpoint).to(default_endpoint)
     end
 
-    it "should clear the username" do
-      expect { subject }.to change{YieldStarClient.username}.from(username).to(nil)
+    it "clears the username" do
+      expect { subject }.to change(YieldStarClient, :username).from(username).to(nil)
     end
 
-    it "should clear the password" do
-      expect { subject }.to change{YieldStarClient.password}.from(password).to(nil)
+    it "clears the password" do
+      expect { subject }.to change(YieldStarClient, :password).from(password).to(nil)
     end
 
-    it "should clear the client_name" do
-      expect { subject }.to change{YieldStarClient.client_name}.from(client_name).to(nil)
+    it "clears the client_name" do
+      expect { subject }.to change(YieldStarClient, :client_name).from(client_name).to(nil)
     end
 
-    it "should change the namespace to the default" do
-      expect { subject }.to change{YieldStarClient.namespace}.from(namespace).to(default_namespace)
+    it "changes the namespace to the default" do
+      expect { subject }.to change(YieldStarClient, :namespace).from(namespace).to(default_namespace)
     end
 
-    it "should change the logger to the default" do
-      expect { subject }.to change{YieldStarClient.logger}
+    it "changes the logger to the default" do
+      expect { subject }.to change(YieldStarClient, :logger)
       YieldStarClient.logger.should be_an_instance_of Logger
     end
 
-    it "should change the debug setting to the default" do
-      expect { subject }.to change{YieldStarClient.debug?}.from(true).to(false)
+    it "changes the debug setting to the default" do
+      expect { subject }.to change(YieldStarClient, :debug?).from(true).to(false)
     end
   end
 end

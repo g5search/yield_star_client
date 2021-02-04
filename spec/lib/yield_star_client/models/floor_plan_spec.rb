@@ -12,7 +12,7 @@ module YieldStarClient
           max_final_rent: 35,
           avg_sq_ft: 800,
           bed_rooms: 2,
-          bath_rooms: 1.5
+          bath_rooms: 1.5,
         }
       end
 

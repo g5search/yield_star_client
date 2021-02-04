@@ -1,12 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   RSpec.describe AvailableUnit do
-
     describe ".new_from_hash" do
       let(:hash) do
         {
-          unit_number: "111"
+          unit_number: "111",
         }
       end
 
@@ -16,6 +15,5 @@ module YieldStarClient
         expect(unit.id).to eq "111"
       end
     end
-
   end
 end

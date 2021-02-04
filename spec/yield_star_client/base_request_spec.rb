@@ -1,8 +1,7 @@
 require "spec_helper"
 
 module YieldStarClient
-  describe BaseRequest do
-
+  describe BaseRequest, type: :model do
     context "attributes" do
       subject { described_class }
 
@@ -26,7 +25,7 @@ module YieldStarClient
     end
 
     it "validates the length of client_name" do
-      request = described_class.new(client_name: "c"*17)
+      request = described_class.new(client_name: "c" * 17)
       expect(request).to be_invalid
     end
 
@@ -53,7 +52,6 @@ module YieldStarClient
           expect { request.execute }.
             to raise_error(ArgumentError, "Client name is too long (maximum is 16 characters)")
         end
-
       end
 
       it "makes a request with the correct action" do
@@ -77,6 +75,5 @@ module YieldStarClient
         expect(fake_request_class.execute(params)).to eq response
       end
     end
-
   end
 end
