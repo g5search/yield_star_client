@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :yield_star_client_floor_plan, class: YieldStarClient::FloorPlan do
     external_property_id "321809"
