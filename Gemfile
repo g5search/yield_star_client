@@ -5,5 +5,12 @@ gemspec
 
 gem "pry"
 gem "pry-byebug"
-gem "vcr"
-gem "virtus-matchers", github: "jpmoral/virtus-matchers", branch: "master"
+gem "virtus-matchers", github: "g5/virtus-matchers"
+gem "simplecov", "~> 0.17.0", require: false
+gem "simplecov-console", require: false
+
+source "https://gem.fury.io/g5dev/" do
+  group :test, :development do
+    gem "g5-rubocop-style"
+  end
+end
