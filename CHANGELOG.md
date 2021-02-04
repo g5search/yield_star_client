@@ -1,3 +1,11 @@
+# CHANGELOG
+
+## 3.3.0-alpha.01
+
+* Rails v6 compatible
+* Applied g5-rubocop-style
+* Switch to using FactoryBot
+
 ## 3.2.1
 
 * Change endpoint to https
