@@ -1,4 +1,4 @@
-require "modelish"
+require 'modelish'
 
 module YieldStarClient
   # @private

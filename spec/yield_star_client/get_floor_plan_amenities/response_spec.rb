@@ -1,9 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetFloorPlanAmenities
     describe Response do
-      describe "#amenities" do
+      describe '#amenities' do
         subject { described_class.new(soap_response).amenities }
 
         let(:soap_response) do
@@ -11,25 +11,25 @@ module YieldStarClient
             to_hash: {
               get_floor_plan_amenities_response: {
                 return: {
-                  external_property_id: "external_property_id",
-                  unit_name: "unit_name",
-                  amenity: amenity_response,
-                },
-              },
-            },
+                  external_property_id: 'external_property_id',
+                  unit_name: 'unit_name',
+                  amenity: amenity_response
+                }
+              }
+            }
           )
         end
 
-        context "there are no amenities" do
+        context 'there are no amenities' do
           let(:amenity_response) { nil }
 
           it { is_expected.to be_empty }
         end
 
-        context "there is one amenity" do
+        context 'there is one amenity' do
           let(:amenity) { double(Amenity) }
           let(:amenity_attributes) do
-            { name: "Rent Adjustment", type: "Fixed", value: 50.0 }
+            { name: 'Rent Adjustment', type: 'Fixed', value: 50.0 }
           end
           let(:amenity_response) { amenity_attributes }
 
@@ -41,16 +41,16 @@ module YieldStarClient
           it { is_expected.to eq [amenity] }
         end
 
-        context "there are multiple amenities" do
+        context 'there are multiple amenities' do
           let(:amenity_1) { double(Amenity) }
           let(:amenity_2) { double(Amenity) }
 
           let(:amenity_1_attributes) do
-            { name: "Rent Adjustment", type: "Fixed", value: 50.0 }
+            { name: 'Rent Adjustment', type: 'Fixed', value: 50.0 }
           end
 
           let(:amenity_2_attributes) do
-            { name: "Rent Adjustment", type: "Fixed", value: 60.0 }
+            { name: 'Rent Adjustment', type: 'Fixed', value: 60.0 }
           end
 
           let(:amenities) { [amenity_1, amenity_2] }

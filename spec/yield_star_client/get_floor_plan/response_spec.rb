@@ -1,32 +1,32 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetFloorPlan
     describe Response do
-      describe "#floor_plan" do
+      describe '#floor_plan' do
         let(:soap_response) do
           double(
             to_hash: {
               get_floor_plan_response: {
                 return: {
-                  floor_plan: floor_plan_attributes,
-                },
-              },
-            },
+                  floor_plan: floor_plan_attributes
+                }
+              }
+            }
           )
         end
 
         let(:floor_plan_attributes) do
           {
-            external_property_id: "property_id",
-            name: "name",
+            external_property_id: 'property_id',
+            name: 'name',
             square_footage: 1,
             bed_rooms: 1.5,
-            bath_rooms: 1.5,
+            bath_rooms: 1.5
           }
         end
 
-        it "returns a floor plan object" do
+        it 'returns a floor plan object' do
           result = described_class.new(soap_response)
 
           expect(result.floor_plan).to be_a FloorPlan

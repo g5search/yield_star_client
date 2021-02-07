@@ -10,7 +10,7 @@ module YieldStarClient
             name: hash[:name],
             square_feet: hash[:square_footage],
             bedrooms: hash[:bed_rooms],
-            bathrooms: hash[:bath_rooms],
+            bathrooms: hash[:bath_rooms]
           )
         end
       end

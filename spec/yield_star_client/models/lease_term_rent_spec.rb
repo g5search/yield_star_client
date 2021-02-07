@@ -1,10 +1,10 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   describe LeaseTermRent, type: :virtus do
     it { is_expected.to be_a UnitRate }
 
-    context "attributes" do
+    context 'attributes' do
       subject { described_class }
 
       it { is_expected.to have_attribute(:make_ready_date, Date) }
@@ -38,17 +38,17 @@ module YieldStarClient
       it { is_expected.to have_attribute(:price_valid_end_date, Date) }
     end
 
-    describe ".new_from" do
-      it "instantiates a LeaseTermRent from the YieldStar hash" do
+    describe '.new_from' do
+      it 'instantiates a LeaseTermRent from the YieldStar hash' do
         lease_term_rent = double
         price_valid_end_date = Date.new(2014, 1, 2)
 
         allow(described_class).to receive(:new).with(
-          price_valid_end_date: price_valid_end_date,
+          price_valid_end_date: price_valid_end_date
         ).and_return(lease_term_rent)
 
         resulting_lease_term_rent = described_class.new_from(
-          pv_end_date: price_valid_end_date,
+          pv_end_date: price_valid_end_date
         )
 
         expect(resulting_lease_term_rent).to eq lease_term_rent

@@ -1,5 +1,5 @@
-require "yield_star_client/validations"
-require "modelish"
+require 'yield_star_client/validations'
+require 'modelish'
 
 module YieldStarClient
   module RentMethods

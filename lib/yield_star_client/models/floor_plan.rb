@@ -28,8 +28,8 @@ module YieldStarClient
           name: floorplan_id,
           square_feet: square_feet,
           bedrooms: bedrooms,
-          bathrooms: bathrooms,
-        ),
+          bathrooms: bathrooms
+        )
       )
     end
   end

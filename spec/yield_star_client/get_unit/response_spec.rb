@@ -1,9 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetUnit
     describe Response do
-      describe "#unit" do
+      describe '#unit' do
         subject { described_class.new(soap_response).unit }
 
         let(:soap_response) do
@@ -11,16 +11,16 @@ module YieldStarClient
             to_hash: {
               get_unit_response: {
                 return: {
-                  unit: unit_attributes,
-                },
-              },
-            },
+                  unit: unit_attributes
+                }
+              }
+            }
           )
         end
 
         let(:unit) { double(Unit) }
         let(:unit_attributes) do
-          { external_property_id: "external_property_id" }
+          { external_property_id: 'external_property_id' }
         end
         let(:unit_response) { unit_attributes }
 

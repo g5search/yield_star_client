@@ -1,9 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetUnitAmenities
     describe Request, type: :model do
-      context "attributes" do
+      context 'attributes' do
         subject { described_class }
 
         it { is_expected.to have_attribute(:external_property_id, String) }
@@ -11,7 +11,7 @@ module YieldStarClient
         it { is_expected.to have_attribute(:building, String) }
       end
 
-      context "validations" do
+      context 'validations' do
         subject { described_class.new }
 
         it { is_expected.to validate_presence_of(:external_property_id) }
@@ -19,7 +19,7 @@ module YieldStarClient
         it { is_expected.to validate_presence_of(:unit_name) }
       end
 
-      it "has the correct SOAP_ACTION" do
+      it 'has the correct SOAP_ACTION' do
         expect(described_class::SOAP_ACTION).to eq :get_unit_amenities
       end
     end

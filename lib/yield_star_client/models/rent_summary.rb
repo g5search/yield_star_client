@@ -30,7 +30,7 @@ module YieldStarClient
     attribute :effective_date, Date
     attribute :external_property_id, String
     attribute :floor_plan_name, String
-    attribute :unit_type, String, default: ""
+    attribute :unit_type, String, default: ''
     attribute :bedrooms, Float
     attribute :bathrooms, Float
     attribute :avg_square_feet, Integer
@@ -62,7 +62,7 @@ module YieldStarClient
     end
 
     def self.bed_and_bath_unit_type_split(unit_type)
-      unit_type.split("x")
+      unit_type.split('x')
     end
   end
 end

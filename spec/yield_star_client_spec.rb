@@ -1,23 +1,23 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe YieldStarClient do
   let(:default_endpoint) { YieldStarClient::DEFAULT_ENDPOINT }
   let(:default_namespace) { YieldStarClient::DEFAULT_NAMESPACE }
 
-  let(:endpoint) { "http://configured.endpoint.com" }
-  let(:username) { "configured user" }
-  let(:password) { "configured password" }
-  let(:namespace) { "http://configured.namespace.com" }
-  let(:client_name) { "configured client name" }
+  let(:endpoint) { 'http://configured.endpoint.com' }
+  let(:username) { 'configured user' }
+  let(:password) { 'configured password' }
+  let(:namespace) { 'http://configured.namespace.com' }
+  let(:client_name) { 'configured client name' }
 
   after { YieldStarClient.reset }
 
-  it "has a version" do
+  it 'has a version' do
     subject::VERSION.should be
   end
 
-  context "with default configuration" do
-    it "has the correct settings" do
+  context 'with default configuration' do
+    it 'has the correct settings' do
       expect(subject.endpoint).to eq default_endpoint
       expect(subject.username).to be_blank
       expect(subject.password).to be_blank
@@ -28,12 +28,12 @@ describe YieldStarClient do
     end
   end
 
-  describe ".configure" do
+  describe '.configure' do
     subject { YieldStarClient.configure(&config_block) }
 
     let(:logger) { double }
 
-    context "with full configuration" do
+    context 'with full configuration' do
       let(:config_block) do
         lambda do |config|
           config.endpoint = endpoint
@@ -48,7 +48,7 @@ describe YieldStarClient do
 
       it { is_expected.to eq YieldStarClient }
 
-      it "has the correct configuration" do
+      it 'has the correct configuration' do
         expect(subject.endpoint).to eq endpoint
         expect(subject.username).to eq username
         expect(subject.password).to eq password
@@ -60,7 +60,7 @@ describe YieldStarClient do
       it { is_expected.to be_debug }
     end
 
-    context "with partial configuration" do
+    context 'with partial configuration' do
       let(:config_block) do
         lambda do |config|
           config.username = username
@@ -72,7 +72,7 @@ describe YieldStarClient do
 
       it { is_expected.to eq YieldStarClient }
 
-      it "has the correct configuration" do
+      it 'has the correct configuration' do
         expect(subject.endpoint).to eq default_endpoint
         expect(subject.username).to eq username
         expect(subject.password).to eq password
@@ -85,7 +85,7 @@ describe YieldStarClient do
     end
   end
 
-  describe ".reset" do
+  describe '.reset' do
     subject { YieldStarClient.reset }
 
     before do
@@ -102,32 +102,32 @@ describe YieldStarClient do
 
     let(:logger) { double }
 
-    it "changes the endpoint to the default" do
+    it 'changes the endpoint to the default' do
       expect { subject }.to change(YieldStarClient, :endpoint).from(endpoint).to(default_endpoint)
     end
 
-    it "clears the username" do
+    it 'clears the username' do
       expect { subject }.to change(YieldStarClient, :username).from(username).to(nil)
     end
 
-    it "clears the password" do
+    it 'clears the password' do
       expect { subject }.to change(YieldStarClient, :password).from(password).to(nil)
     end
 
-    it "clears the client_name" do
+    it 'clears the client_name' do
       expect { subject }.to change(YieldStarClient, :client_name).from(client_name).to(nil)
     end
 
-    it "changes the namespace to the default" do
+    it 'changes the namespace to the default' do
       expect { subject }.to change(YieldStarClient, :namespace).from(namespace).to(default_namespace)
     end
 
-    it "changes the logger to the default" do
+    it 'changes the logger to the default' do
       expect { subject }.to change(YieldStarClient, :logger)
       YieldStarClient.logger.should be_an_instance_of Logger
     end
 
-    it "changes the debug setting to the default" do
+    it 'changes the debug setting to the default' do
       expect { subject }.to change(YieldStarClient, :debug?).from(true).to(false)
     end
   end

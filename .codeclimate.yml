@@ -2,8 +2,8 @@ version: "2"
 
 prepare:
   fetch:
-    - url: https://raw.githubusercontent.com/g5search/g5-rubocop-style/v1.0.1/default.yml
-      path: .rubocop-https---raw-githubusercontent-com-g5search-g5-rubocop-style-v1-0-1-default-yml
+    - url: https://raw.githubusercontent.com/g5search/g5-rubocop-style/v1.1.0/default.yml
+      path: .rubocop-https---raw-githubusercontent-com-g5search-g5-rubocop-style-v1-1-0-default-yml
 
 plugins:
   rubocop:

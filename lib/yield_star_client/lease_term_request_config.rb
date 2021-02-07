@@ -38,13 +38,13 @@ module YieldStarClient
                                      :max_lease_term,
                                      :first_move_in_date,
                                      :last_move_in_date,
-                                     :unit_available_date,
+                                     :unit_available_date
                                    )).to_request_hash
         end
         request_element = self.class.lease_term_request_opts.
                           fetch(:request_element)
         attributes.merge(
-          request_element => lease_term_rent_options,
+          request_element => lease_term_rent_options
         )
       end
     end

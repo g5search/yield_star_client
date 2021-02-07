@@ -4,7 +4,7 @@ module YieldStarClient
       SOAP_ACTION = :get_lease_term_rent
 
       configure_for_lease_term_rent(
-        request_element: :lease_term_rent_unit_request,
+        request_element: :lease_term_rent_unit_request
       )
     end
   end

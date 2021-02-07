@@ -1,5 +1,5 @@
-require "yield_star_client/validations"
-require "modelish"
+require 'yield_star_client/validations'
+require 'modelish'
 
 module YieldStarClient
   module FloorPlanMethods
@@ -17,7 +17,7 @@ module YieldStarClient
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
     def get_floor_plans(external_property_id)
       request_args = default_savon_params.merge(
-        external_property_id: external_property_id,
+        external_property_id: external_property_id
       )
       response = GetFloorPlans::Request.execute(request_args)
       GetFloorPlans::Response.new(response).floor_plans
@@ -37,7 +37,7 @@ module YieldStarClient
     def get_floor_plan(external_property_id, floor_plan_name)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
-        floor_plan_name: floor_plan_name,
+        floor_plan_name: floor_plan_name
       )
       response = GetFloorPlan::Request.execute(request_args)
       GetFloorPlan::Response.new(response).floor_plan
@@ -45,7 +45,7 @@ module YieldStarClient
 
     def get_floor_plans_with_units(external_property_id)
       request_args = default_savon_params.merge(
-        external_property_id: external_property_id,
+        external_property_id: external_property_id
       )
 
       response = GetRentSummary::Request.execute(request_args)

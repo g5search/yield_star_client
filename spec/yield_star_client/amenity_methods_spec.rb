@@ -1,20 +1,20 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   describe Client do
     include Savon::SpecHelper
 
-    let(:logger) { Logger.new("tmp/test.log") }
+    let(:logger) { Logger.new('tmp/test.log') }
     let(:client_config) do
       CONFIG.merge(
         debug: true,
-        logger: logger,
+        logger: logger
       )
     end
 
     let(:client) { described_class.new(client_config) }
 
-    describe "#get_floor_plan_amenities" do
+    describe '#get_floor_plan_amenities' do
       before(:all) { savon.mock! }
 
       after(:all) { savon.unmock! }
@@ -22,19 +22,19 @@ module YieldStarClient
       let(:fixture) do
         path = File.join(
           SPEC_DIR,
-          "fixtures",
-          "get_floor_plan_amenities",
-          "multiple_amenities.xml",
+          'fixtures',
+          'get_floor_plan_amenities',
+          'multiple_amenities.xml'
         )
         File.read(path)
       end
 
-      it "returns floor plan amenities", vcr: {record: :once} do
+      it 'returns floor plan amenities', vcr: {record: :once} do
         expected_message = client_config.
                            slice(:client_name).
                            merge(
-                             external_property_id: "external_property_id",
-                             floor_plan_name: "floor_plan_name",
+                             external_property_id: 'external_property_id',
+                             floor_plan_name: 'floor_plan_name'
                            )
 
         savon.expects(:get_floor_plan_amenities).
@@ -42,8 +42,8 @@ module YieldStarClient
           returns(fixture)
 
         amenities = client.get_floor_plan_amenities(
-          "external_property_id",
-          "floor_plan_name",
+          'external_property_id',
+          'floor_plan_name'
         )
 
         expect(amenities.first).to be_an Amenity
@@ -76,8 +76,8 @@ module YieldStarClient
       end
     end
 
-    describe "#get_unit_amenities" do
-      it "returns unit amenities", vcr: {record: :once} do
+    describe '#get_unit_amenities' do
+      it 'returns unit amenities', vcr: {record: :once} do
         # loop through the different properties and floor plans until we
         # find one that has amenities to test.
         amenities = catch(:amenities) do
@@ -89,7 +89,7 @@ module YieldStarClient
               units.each do |unit|
                 amenities = client.get_unit_amenities(
                   external_property_id,
-                  unit.name,
+                  unit.name
                 )
 
                 throw :amenities, amenities if amenities.any?
@@ -100,17 +100,17 @@ module YieldStarClient
           throw :amenities, []
         end
 
-        raise "Unable to find any amenities" if amenities.empty?
+        raise 'Unable to find any amenities' if amenities.empty?
 
         expect(amenities.first).to be_an Amenity
       end
     end
 
-    it "passes the building to the request class" do
+    it 'passes the building to the request class' do
       expected_hash = {
-        external_property_id: "external_property_id",
-        unit_name: "unit_name",
-        building: "building",
+        external_property_id: 'external_property_id',
+        unit_name: 'unit_name',
+        building: 'building'
       }
 
       response = double
@@ -125,9 +125,9 @@ module YieldStarClient
         with(response).and_return(parsed_response)
 
       client.get_unit_amenities(
-        "external_property_id",
-        "unit_name",
-        "building",
+        'external_property_id',
+        'unit_name',
+        'building'
       )
     end
   end

@@ -1,5 +1,5 @@
-require "yield_star_client/validations"
-require "modelish"
+require 'yield_star_client/validations'
+require 'modelish'
 
 module YieldStarClient
   module UnitMethods
@@ -51,7 +51,7 @@ module YieldStarClient
     def get_units(external_property_id, floor_plan_name=nil)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
-        floor_plan_name: floor_plan_name,
+        floor_plan_name: floor_plan_name
       )
       response = GetUnits::Request.execute(request_args)
       GetUnits::Response.new(response).units

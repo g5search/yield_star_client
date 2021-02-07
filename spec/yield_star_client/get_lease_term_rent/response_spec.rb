@@ -1,9 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetLeaseTermRent
     describe Response do
-      it "is configured to parse lease term rents" do
+      it 'is configured to parse lease term rents' do
         opts = described_class.lease_term_response_opts
 
         accessor_method = opts[:accessor_method]

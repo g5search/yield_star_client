@@ -18,8 +18,8 @@ module YieldStarClient
       savon_client.call(
         action,
         message: {
-          request: request_params,
-        },
+          request: request_params
+        }
       )
     rescue Savon::SOAPFault, Savon::HTTPError => e
       raise ServerError.translate_fault(e)
@@ -32,7 +32,7 @@ module YieldStarClient
 
       savon_client_params[:basic_auth] = [
         savon_client_params.delete(:username),
-        savon_client_params.delete(:password),
+        savon_client_params.delete(:password)
       ]
       savon_client_params[:element_form_default] = :qualified
       savon_client_params

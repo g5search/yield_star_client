@@ -42,8 +42,8 @@ module YieldStarClient
     def self.new_from_hash(hash)
       new(
         hash.merge(
-          id: hash[:unit_number],
-        ),
+          id: hash[:unit_number]
+        )
       )
     end
   end
