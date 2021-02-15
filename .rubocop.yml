@@ -1,0 +1,2 @@
+inherit_from:
+  - https://raw.githubusercontent.com/g5search/g5-rubocop-style/v1.1.0/default.yml

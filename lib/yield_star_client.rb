@@ -1,8 +1,8 @@
-require "modelish"
-require "active_model"
-require "virtus"
-require "active_support/concern"
-require "active_support/core_ext/class/attribute"
+require 'modelish'
+require 'active_model'
+require 'virtus'
+require 'active_support/concern'
+require 'active_support/core_ext/class/attribute'
 
 require 'yield_star_client/version'
 require 'yield_star_client/validations'
@@ -20,7 +20,7 @@ require 'yield_star_client/models/lease_term_rent_options'
 require 'yield_star_client/models/unit'
 require 'yield_star_client/models/floor_plan'
 
-require "yield_star_client/extract_rent_summary_hashes"
+require 'yield_star_client/extract_rent_summary_hashes'
 
 require 'yield_star_client/configuration'
 

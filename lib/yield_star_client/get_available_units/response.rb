@@ -1,7 +1,6 @@
 module YieldStarClient
   module GetAvailableUnits
     class Response < BaseResponse
-
       def available_units
         return @available_units if @available_units
 
@@ -22,7 +21,6 @@ module YieldStarClient
           [floor_plan_hash[:unit]]
         end.flatten.compact
       end
-
     end
   end
 end

@@ -1,13 +1,13 @@
 module YieldStarClient
   class ExtractLeaseTermRentHashes
-
     def self.from(soap_response, soap_hash_accessors)
       soap_wrapper_element = soap_hash_accessors.
-        fetch(:soap_wrapper_element)
+                             fetch(:soap_wrapper_element)
       soap_unit_element = soap_hash_accessors.fetch(:soap_unit_element)
 
       lease_term_node = soap_response.to_hash[soap_wrapper_element]
       return [] if lease_term_node.nil?
+
       return_element = lease_term_node[:return]
 
       external_property_id = return_element[:external_property_id]
@@ -24,10 +24,9 @@ module YieldStarClient
       unit_rates = [ltr_unit_response_hash[:unit_rate]].flatten.compact
       unit_rates.map do |unit_rate|
         hash = unit_rate.
-          merge(ltr_unit_response_hash.reject { |k, v| k == :unit_rate }).
-          merge(external_property_id: external_property_id)
+               merge(ltr_unit_response_hash.reject { |k, _v| k == :unit_rate }).
+               merge(external_property_id: external_property_id)
       end
     end
-
   end
 end

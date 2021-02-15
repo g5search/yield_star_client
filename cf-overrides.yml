@@ -1,0 +1,5 @@
+BaseImageTag: "2.7-v1.0.1"
+CIPlan: "g5search/ci-plan-ruby-gem:v1.0.2"
+GemName: "yield_star_client"
+PreTestSetup:
+  cp spec/config.yml.sample /app/spec/config.yml

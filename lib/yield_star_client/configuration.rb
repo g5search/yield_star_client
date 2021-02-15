@@ -5,11 +5,11 @@ module YieldStarClient
   # All valid configuration options.
   #
   # @see YieldStarClient.configure
-  VALID_CONFIG_OPTIONS = [:endpoint, :username, :password, :namespace, :client_name,
-                          :debug, :logger, :ssl_version]
+  VALID_CONFIG_OPTIONS = %i[endpoint username password namespace client_name
+                            debug logger ssl_version].freeze
 
-  DEFAULT_ENDPOINT = ENV.fetch("YIELD_STAR_ENDPOINT", 'https://rmsws.yieldstar.com/rmsws/AppExchange').freeze
-  DEFAULT_NAMESPACE = ENV.fetch("YIELD_STAR_NAMESPACE", 'http://yieldstar.com/ws/AppExchange/v1').freeze
+  DEFAULT_ENDPOINT = ENV.fetch('YIELD_STAR_ENDPOINT', 'https://rmsws.yieldstar.com/rmsws/AppExchange').freeze
+  DEFAULT_NAMESPACE = ENV.fetch('YIELD_STAR_NAMESPACE', 'http://yieldstar.com/ws/AppExchange/v1').freeze
   DEFAULT_SSL_VERSION = :TLSv1_2
 
   module Configuration
@@ -18,10 +18,10 @@ module YieldStarClient
     def self.extended(base)
       # Default configuration - happens whether or not .configure is called
       base.config :yield_star do
-        default :endpoint => DEFAULT_ENDPOINT
-        default :namespace => DEFAULT_NAMESPACE
-        default :ssl_version => DEFAULT_SSL_VERSION
-        default :debug => false
+        default endpoint: DEFAULT_ENDPOINT
+        default namespace: DEFAULT_NAMESPACE
+        default ssl_version: DEFAULT_SSL_VERSION
+        default debug: false
       end
     end
 
@@ -46,11 +46,11 @@ module YieldStarClient
     attr_writer :logger
 
     def logger
-      @logger ||= Logger.new(STDOUT)
+      @logger ||= Logger.new($stdout)
     end
 
     # Configures this module through the given +block+.
-    # Default configuration options will be applied unless 
+    # Default configuration options will be applied unless
     # they are explicitly overridden in the +block+.
     #
     # @yield [_self] configures service connection options
@@ -89,7 +89,7 @@ module YieldStarClient
     # @see DEFAULT_ENDPOINT
     # @see DEFAULT_NAMESPACE
     def reset
-      VALID_CONFIG_OPTIONS.each { |opt| self.send("#{opt}=", nil) }
+      VALID_CONFIG_OPTIONS.each { |opt| send("#{opt}=", nil) }
       self.logger = nil
     end
   end

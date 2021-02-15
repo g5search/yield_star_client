@@ -17,7 +17,7 @@ module YieldStarClient
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
     def get_floor_plans(external_property_id)
       request_args = default_savon_params.merge(
-        external_property_id: external_property_id,
+        external_property_id: external_property_id
       )
       response = GetFloorPlans::Request.execute(request_args)
       GetFloorPlans::Response.new(response).floor_plans
@@ -37,7 +37,7 @@ module YieldStarClient
     def get_floor_plan(external_property_id, floor_plan_name)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
-        floor_plan_name: floor_plan_name,
+        floor_plan_name: floor_plan_name
       )
       response = GetFloorPlan::Request.execute(request_args)
       GetFloorPlan::Response.new(response).floor_plan
@@ -50,8 +50,8 @@ module YieldStarClient
 
       response = GetRentSummary::Request.execute(request_args)
 
-      floor_plans = GetRentSummary::Response.new(response)
-        .rent_summaries_as_floor_plans
+      floor_plans = GetRentSummary::Response.new(response).
+                    rent_summaries_as_floor_plans
 
       available_units = get_available_units(external_property_id)
 
@@ -68,12 +68,12 @@ module YieldStarClient
 
     def get_available_units(external_property_id)
       request_args = default_savon_params.
-        merge(external_property_id: external_property_id)
+                     merge(external_property_id: external_property_id)
 
       response = GetAvailableUnits::Request.execute(request_args)
 
-      GetAvailableUnits::Response.new(response)
-        .available_units
+      GetAvailableUnits::Response.new(response).
+        available_units
     end
   end
 end

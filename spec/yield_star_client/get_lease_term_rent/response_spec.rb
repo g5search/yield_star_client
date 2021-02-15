@@ -1,10 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   module GetLeaseTermRent
     describe Response do
-
-      it "is configured to parse lease term rents" do
+      it 'is configured to parse lease term rents' do
         opts = described_class.lease_term_response_opts
 
         accessor_method = opts[:accessor_method]
@@ -17,8 +16,6 @@ module YieldStarClient
         expect(soap_wrapper_element).to eq :get_lease_term_rent_response
         expect(soap_unit_element).to eq :lease_term_rent_unit_response
       end
-
     end
   end
-
 end

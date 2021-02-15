@@ -1,5 +1,4 @@
 module YieldStarClient
-
   # Represents a unit in the YieldStar system.
   #
   # A unit is guaranteed to have an +external_property_id+, +floor_plan_name+, +name+, and +availablity_status+.
@@ -24,13 +23,12 @@ module YieldStarClient
     property :external_property_id
     property :floor_plan_name
     property :name
-    property :availability_status, :type => Symbol
+    property :availability_status, type: Symbol
     property :building
-    property :bedrooms, :from => :bed_rooms, :type => Float
-    property :bathrooms, :from => :bath_rooms, :type => Float
-    property :square_feet, :type => Integer, :from => :square_footage
+    property :bedrooms, from: :bed_rooms, type: Float
+    property :bathrooms, from: :bath_rooms, type: Float
+    property :square_feet, type: Integer, from: :square_footage
     property :unit_type
-    property :make_ready_date, :type => Date
+    property :make_ready_date, type: Date
   end
-
 end
