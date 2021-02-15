@@ -1,6 +1,6 @@
 module YieldStarClient
   module LeaseTermRequestConfig
-    def configure_for_lease_term_rent(opts={})
+    def configure_for_lease_term_rent(opts = {})
       include Methods
       self.lease_term_request_opts = opts
     end

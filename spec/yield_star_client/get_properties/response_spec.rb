@@ -29,7 +29,7 @@ module YieldStarClient
 
           let(:soap_property_value) { [{prop: 1}, {prop: 2}] }
 
-          it { is_expected.to eq [property_1, property_2]}
+          it { is_expected.to eq [property_1, property_2] }
         end
 
         context 'there is a single property' do
@@ -37,7 +37,7 @@ module YieldStarClient
             allow(Property).to receive(:new).with(prop: 1).and_return(property_1)
           end
 
-          let(:soap_property_value) {{ prop: 1 }}
+          let(:soap_property_value) { { prop: 1 } }
 
           it { is_expected.to eq [property_1] }
         end

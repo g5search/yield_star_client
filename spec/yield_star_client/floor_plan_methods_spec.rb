@@ -10,7 +10,7 @@ module YieldStarClient
     end
 
     describe '#get_floor_plans' do
-      it 'returns floor plans', vcr: {record: :once} do
+      it 'returns floor plans', vcr: { record: :once} do
         floor_plans = catch(:floor_plans) do
           client.get_properties.each do |property|
             external_property_id = property.external_property_id

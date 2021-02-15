@@ -29,7 +29,7 @@ module YieldStarClient
         File.read(path)
       end
 
-      it 'returns floor plan amenities', vcr: {record: :once} do
+      it 'returns floor plan amenities', vcr: { record: :once } do
         expected_message = client_config.
                            slice(:client_name).
                            merge(
@@ -38,7 +38,7 @@ module YieldStarClient
                            )
 
         savon.expects(:get_floor_plan_amenities).
-          with(message: {request: expected_message.symbolize_keys}).
+          with(message: { request: expected_message.symbolize_keys }).
           returns(fixture)
 
         amenities = client.get_floor_plan_amenities(
@@ -77,7 +77,7 @@ module YieldStarClient
     end
 
     describe '#get_unit_amenities' do
-      it 'returns unit amenities', vcr: {record: :once} do
+      it 'returns unit amenities', vcr: { record: :once } do
         # loop through the different properties and floor plans until we
         # find one that has amenities to test.
         amenities = catch(:amenities) do

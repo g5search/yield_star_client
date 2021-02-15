@@ -20,8 +20,8 @@ module YieldStarClient
 
     let(:soap_response) { double }
 
-    let(:lease_term_rent_hash_1) {{ hash: 1 }}
-    let(:lease_term_rent_hash_2) {{ hash: 2 }}
+    let(:lease_term_rent_hash_1) { { hash: 1 } }
+    let(:lease_term_rent_hash_2) { { hash: 2 } }
 
     let(:lease_term_rent_1) { double(result_class) }
     let(:lease_term_rent_2) { double(result_class) }

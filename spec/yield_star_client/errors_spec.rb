@@ -104,7 +104,7 @@ describe YieldStarClient::ServerError do
       end
 
       context 'for an internal error fault' do
-        let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
+        let(:faultstring) { 'Internal error [12e7cfbb782-37a]' }
         let(:faultcode) { '12e7cfbb782-37a' }
         let(:fault_type) { :internal_error_fault }
 
@@ -120,7 +120,7 @@ describe YieldStarClient::ServerError do
       end
 
       context 'for an operation fault' do
-        let(:faultstring) {'Internal error [12e7cfbb782-37a]'}
+        let(:faultstring) { 'Internal error [12e7cfbb782-37a]' }
         let(:faultcode) { '12e7cfbb782-37a' }
         let(:fault_type) { :operation_fault }
 
@@ -136,7 +136,7 @@ describe YieldStarClient::ServerError do
       end
 
       context 'for a generic fault' do
-        let(:faultstring) {'java.lang.NullPointerException'}
+        let(:faultstring) { 'java.lang.NullPointerException' }
         let(:faultcode) { 'S:Server' }
         let(:fault_type) { :operation_fault }
 

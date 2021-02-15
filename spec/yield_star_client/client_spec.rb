@@ -6,13 +6,13 @@ describe YieldStarClient::Client do
   after { YieldStarClient.reset }
 
   let(:client) do
-    YieldStarClient::Client.new({endpoint: endpoint,
-                                 username: username,
-                                 password: password,
-                                 namespace: namespace,
-                                 client_name: client_name,
-                                 debug: debug,
-                                 logger: logger})
+    YieldStarClient::Client.new({ endpoint: endpoint,
+                                  username: username,
+                                  password: password,
+                                  namespace: namespace,
+                                  client_name: client_name,
+                                  debug: debug,
+                                  logger: logger })
   end
 
   let(:endpoint) { 'https://foo.com?wsdl' }

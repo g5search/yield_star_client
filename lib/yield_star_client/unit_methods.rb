@@ -17,11 +17,11 @@ module YieldStarClient
     # @raise [YieldStarClient::OperationError] when the service raises an OperationError fault
     # @raise [YieldStarClient::InternalError] when the service raises an InternalError fault
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
-    def get_unit(external_property_id, unit_name, building_name=nil)
+    def get_unit(external_property_id, unit_name, building_name = nil)
       validate_external_property_id!(external_property_id)
       validate_required!(unit_name: unit_name)
 
-      body = {external_property_id: external_property_id, name: unit_name}
+      body = { external_property_id: external_property_id, name: unit_name }
       body[:building] = building_name if building_name
 
       response = send_soap_request(:get_unit, body)
@@ -48,7 +48,7 @@ module YieldStarClient
     # @raise [YieldStarClient::OperationError] when the service raises an OperationError fault
     # @raise [YieldStarClient::InternalError] when the service raises an InternalError fault
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
-    def get_units(external_property_id, floor_plan_name=nil)
+    def get_units(external_property_id, floor_plan_name = nil)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
         floor_plan_name: floor_plan_name

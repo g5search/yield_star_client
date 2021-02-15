@@ -11,6 +11,6 @@ gem 'simplecov-console', require: false
 
 source 'https://gem.fury.io/g5dev/' do
   group :test, :development do
-    gem 'g5-rubocop-style'
+    gem 'g5-rubocop-style', '~> 1.1.0'
   end
 end

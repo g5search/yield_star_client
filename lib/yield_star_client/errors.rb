@@ -8,7 +8,7 @@ module YieldStarClient
     # @param [String] message the error message. If no message is supplied, the
     #                 object's class name will be used as the message.
     # @param [String] code the error code
-    def initialize(message = nil, code=nil)
+    def initialize(message = nil, code = nil)
       super(message)
       @code = code
     end

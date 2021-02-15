@@ -38,8 +38,8 @@ module YieldStarClient
     context 'there are multiple unit rates' do
       let(:unit_rate) do
         [
-          {rate_info: '1'},
-          {rate_info: '2'}
+          { rate_info: '1' },
+          { rate_info: '2' }
         ]
       end
 
@@ -66,7 +66,7 @@ module YieldStarClient
     end
 
     context 'there is a single property' do
-      let(:unit_rate) {{rate_info: '1'}}
+      let(:unit_rate) { { rate_info: '1' } }
 
       it do
         lease_term_hash = {
@@ -95,13 +95,13 @@ module YieldStarClient
             unit_number: 'unit_number',
             building: 'building',
             make_ready_date: make_ready_date,
-            unit_rate: [{rate_info: '1'}, {rate_info: '2'}]
+            unit_rate: [{ rate_info: '1' }, { rate_info: '2' }]
           },
           {
             unit_number: 'unit_number_2',
             building: 'building',
             make_ready_date: make_ready_date,
-            unit_rate: {rate_info: '3'}
+            unit_rate: { rate_info: '3' }
           }
         ]
       end

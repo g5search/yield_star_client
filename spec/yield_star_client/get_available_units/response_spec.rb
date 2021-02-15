@@ -24,12 +24,12 @@ module YieldStarClient
       before do
         savon.mock!
 
-        savon.expects(:get_available_units)
-             .with(
-               message: {
-                 request: request_params
-               }
-             ).
+        savon.expects(:get_available_units).
+          with(
+            message: {
+              request: request_params
+            }
+          ).
           returns(fixture)
       end
 

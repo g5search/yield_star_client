@@ -24,13 +24,13 @@ module YieldStarClient
       before do
         savon.mock!
 
-        savon.expects(:get_rent_summary)
-             .with(
-               message: {
-                 request: request_params
-               }
-             )
-             .returns(fixture)
+        savon.expects(:get_rent_summary).
+          with(
+            message: {
+              request: request_params
+            }
+          ).
+          returns(fixture)
       end
 
       after { savon.unmock! }
