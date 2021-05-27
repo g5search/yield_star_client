@@ -1,3 +1,8 @@
+## 3.3.0-intg1232.01
+
+* Remove configlet gem
+* Enable logging
+
 ## 3.2.1
 
 * Change endpoint to https
