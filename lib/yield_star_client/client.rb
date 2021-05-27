@@ -54,24 +54,9 @@ module YieldStarClient
     include RentMethods
     include LeaseTermRentMethods
 
-    attr_writer *YieldStarClient::VALID_CONFIG_OPTIONS
+    attr_accessor :configuration
 
-    YieldStarClient::VALID_CONFIG_OPTIONS.each do |opt|
-      define_method(opt) { get_value(opt) }
-    end
-
-    def debug=(val)
-      @debug = val
-      @log = self.debug?
-    end
-
-    def debug?
-      get_value(:debug).to_s == 'true'
-    end
-
-    def logger=(val)
-      @logger = val
-    end
+    delegate *YieldStarClient::VALID_CONFIG_OPTIONS, to: :configuration
 
     # Initializes the client. All options are truly optional; if the option
     # is not supplied to this method, then it will be set based on the
@@ -88,7 +73,7 @@ module YieldStarClient
     # @option options [Symbol] :ssl_version The TLS version used for secure connections
     # @option options [true,false] :debug true to enable debug logging of SOAP traffic; defaults to false
     def initialize(options={})
-      options.each { |k,v| self.send("#{k}=", v) if self.respond_to?("#{k}=") }
+      @configuration = Configuration.new(options)
     end
 
     private
@@ -120,35 +105,14 @@ module YieldStarClient
         endpoint: self.endpoint.to_s,
         namespace: self.namespace,
         basic_auth: [self.username.to_s, self.password.to_s],
-        log: debug?,
-        logger: get_value(:logger),
+        log: self.log,
+        logger: self.logger,
         ssl_version: self.ssl_version,
       )
     end
 
-    # Retrieves an attribute's value. If the attribute has not been set
-    # on this object, it is retrieved from the global configuration.
-    #
-    # @see YieldStarClient.configure
-    #
-    # @param [Symbol] attribute the name of the attribute
-    # @return [String] the value of the attribute
-    def get_value(attribute)
-      local_val = instance_variable_get("@#{attribute}")
-      local_val.nil? ? YieldStarClient.send(attribute) : local_val
-    end
-
     def default_savon_params
-      {
-        client_name: self.client_name,
-        endpoint: self.endpoint.to_s,
-        namespace: self.namespace,
-        username: self.username.to_s,
-        password: self.password,
-        log: self.debug?,
-        logger: self.logger,
-        ssl_version: self.ssl_version,
-      }
+      @configuration.to_h
     end
   end
 end
