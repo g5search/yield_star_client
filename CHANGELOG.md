@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 3.3.0-alpha.3 (TDB)
+## 3.3.0
 
 * Rails v6 compatible
 * Applied g5-rubocop-style

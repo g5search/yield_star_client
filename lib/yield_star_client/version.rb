@@ -1,3 +1,3 @@
 module YieldStarClient
-  VERSION = '3.3.0-alpha.3'.freeze
+  VERSION = '3.3.0'.freeze
 end
