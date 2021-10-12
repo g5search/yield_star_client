@@ -1,9 +1,8 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
-  describe BaseRequest do
-
-    context "attributes" do
+  describe BaseRequest, type: :model do
+    context 'attributes' do
       subject { described_class }
 
       it { is_expected.to have_attribute(:client_name, String) }
@@ -14,7 +13,7 @@ module YieldStarClient
       it { is_expected.to have_attribute(:log) }
     end
 
-    context "validations" do
+    context 'validations' do
       subject { described_class.new }
 
       it { is_expected.to validate_presence_of(:client_name) }
@@ -25,47 +24,46 @@ module YieldStarClient
       it { is_expected.to validate_length_of(:client_name).is_at_most(16) }
     end
 
-    it "validates the length of client_name" do
-      request = described_class.new(client_name: "c"*17)
+    it 'validates the length of client_name' do
+      request = described_class.new(client_name: 'c' * 17)
       expect(request).to be_invalid
     end
 
-    describe "#request_args" do
-      it "removes any keys with nil values" do
-        request = described_class.new(client_name: nil, username: "Ok", ssl_version: nil)
-        expect(request.request_args).to eq(username: "Ok")
+    describe '#request_args' do
+      it 'removes any keys with nil values' do
+        request = described_class.new(client_name: nil, username: 'Ok', ssl_version: nil)
+        expect(request.request_args).to eq(username: 'Ok')
       end
     end
 
-    describe ".execute" do
-      context "attributes are invalid" do
-        it "raises ValidationError" do
+    describe '.execute' do
+      context 'attributes are invalid' do
+        it 'raises ValidationError' do
           params = {
-            client_name: "very long client name",
-            endpoint: "endpoint",
-            namespace: "namespace",
-            username: "username",
-            password: "password",
+            client_name: 'very long client name',
+            endpoint: 'endpoint',
+            namespace: 'namespace',
+            username: 'username',
+            password: 'password'
           }
 
           request = described_class.new(params)
 
           expect { request.execute }.
-            to raise_error(ArgumentError, "Client name is too long (maximum is 16 characters)")
+            to raise_error(ArgumentError, 'Client name is too long (maximum is 16 characters)')
         end
-
       end
 
-      it "makes a request with the correct action" do
+      it 'makes a request with the correct action' do
         fake_request_class = Class.new(BaseRequest)
         fake_request_class::SOAP_ACTION = :fake_action
 
         params = {
-          client_name: "client_name",
-          endpoint: "endpoint",
-          namespace: "namespace",
-          username: "username",
-          password: "password",
+          client_name: 'client_name',
+          endpoint: 'endpoint',
+          namespace: 'namespace',
+          username: 'username',
+          password: 'password'
         }
 
         response = double
@@ -77,6 +75,5 @@ module YieldStarClient
         expect(fake_request_class.execute(params)).to eq response
       end
     end
-
   end
 end

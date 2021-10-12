@@ -1,10 +1,10 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   describe RentSummary do
-
-    context "attributes" do
+    context 'attributes' do
       subject { described_class }
+
       it { is_expected.to have_attribute(:effective_date, Date) }
       it { is_expected.to have_attribute(:external_property_id, String) }
       it { is_expected.to have_attribute(:floor_plan_name, String) }
@@ -22,12 +22,12 @@ module YieldStarClient
       it { is_expected.to have_attribute(:floor_plan_description, String) }
     end
 
-    describe ".new_from" do
-      it "maps attributes correctly" do
+    describe '.new_from' do
+      it 'maps attributes correctly' do
         args = {
           bed_rooms: 2.5,
           bath_rooms: 1,
-          avg_sq_ft: 50,
+          avg_sq_ft: 50
         }
 
         rs = RentSummary.new_from(args)
@@ -42,12 +42,11 @@ module YieldStarClient
         let(:unit_type) { '3.5x2' }
         let(:rent_summary) { RentSummary.new(unit_type: unit_type) }
 
-        it "return dimensions extracted from the unit_type" do
+        it 'return dimensions extracted from the unit_type' do
           expect(rent_summary.bedrooms_override_from_unit_type).to eq 3.5
           expect(rent_summary.bathrooms_override_from_unit_type).to eq 2
         end
       end
     end
-
   end
 end

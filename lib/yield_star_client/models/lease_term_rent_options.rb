@@ -1,6 +1,5 @@
 module YieldStarClient
   class LeaseTermRentOptions
-
     include Virtus.model
     include ActiveModel::Validations
 
@@ -18,14 +17,13 @@ module YieldStarClient
     validates :building, length: { maximum: 50 }
 
     def to_request_hash
-      self.attributes.select do |name, value|
+      attributes.select do |_name, value|
         !value.nil?
       end
     end
 
     def validate!
-      fail ArgumentError if invalid?
+      raise ArgumentError if invalid?
     end
-
   end
 end

@@ -12,20 +12,18 @@ module YieldStarClient
   # @attr [Integer] one_time_fixed_concession the one time fixed concession (defaults to 0.0)
   # @attr [Date] price_valid_end_date the last date for which the price is valid
   class LeaseTermRent < UnitRate
-
     attribute :make_ready_date, Date
     attribute :move_in_date, Date
-    attribute :total_concession, Integer, :default => 0
-    attribute :monthly_fixed_concession, Integer, :default => 0
-    attribute :monthly_percent_concession, Float, :default => 0.0
-    attribute :months_concession, Float, :default => 0.0
-    attribute :one_time_fixed_concession, Integer, :default => 0
+    attribute :total_concession, Integer, default: 0
+    attribute :monthly_fixed_concession, Integer, default: 0
+    attribute :monthly_percent_concession, Float, default: 0.0
+    attribute :months_concession, Float, default: 0.0
+    attribute :one_time_fixed_concession, Integer, default: 0
     attribute :price_valid_end_date, Date
 
     def self.new_from(hash)
       hash[:price_valid_end_date] = hash.delete(:pv_end_date)
-      self.new(hash)
+      new(hash)
     end
-
   end
 end

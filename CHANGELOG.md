@@ -1,7 +1,16 @@
-## 3.3.0-intg1232.01
+# CHANGELOG
+
+## 3.3.1-intg1232.01
 
 * Remove configlet gem
 * Enable logging
+
+
+## 3.3.0
+
+* Rails v6 compatible
+* Applied g5-rubocop-style
+* Switch to using FactoryBot
 
 ## 3.2.1
 

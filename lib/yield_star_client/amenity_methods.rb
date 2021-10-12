@@ -20,7 +20,7 @@ module YieldStarClient
     def get_floor_plan_amenities(external_property_id, floor_plan_name)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
-        floor_plan_name: floor_plan_name,
+        floor_plan_name: floor_plan_name
       )
       response = GetFloorPlanAmenities::Request.execute(request_args)
       GetFloorPlanAmenities::Response.new(response).amenities
@@ -39,11 +39,11 @@ module YieldStarClient
     # @raise [YieldStarClient::OperationError] when the service raises an OperationError fault
     # @raise [YieldStarClient::InternalError] when the service raises an InternalError fault
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
-    def get_unit_amenities(external_property_id, unit_name, building=nil)
+    def get_unit_amenities(external_property_id, unit_name, building = nil)
       request_args = default_savon_params.merge(
         external_property_id: external_property_id,
         unit_name: unit_name,
-        building: building,
+        building: building
       )
       response = GetUnitAmenities::Request.execute(request_args)
       GetUnitAmenities::Response.new(response).amenities

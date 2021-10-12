@@ -14,8 +14,9 @@ module YieldStarClient
 
         define_method accessor_method do
           return @models if @models
+
           result_class = self.class.lease_term_response_opts.
-            fetch(:result_class)
+                         fetch(:result_class)
           hashes = extract_lease_term_rent_hashes(@soap_response)
           @models = hashes.map do |hash|
             result_class.new_from(hash)
@@ -29,12 +30,11 @@ module YieldStarClient
         opts = self.class.lease_term_response_opts
         soap_hash_accessors = {
           soap_wrapper_element: opts.fetch(:soap_wrapper_element),
-          soap_unit_element: opts.fetch(:soap_unit_element),
+          soap_unit_element: opts.fetch(:soap_unit_element)
         }
 
         ExtractLeaseTermRentHashes.from(soap_response, soap_hash_accessors)
       end
-
     end
   end
 

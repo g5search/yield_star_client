@@ -11,7 +11,6 @@ module YieldStarClient
   # @attr [true,false] best indicates whether this is the best (i.e. highest) rent
   #                         for the unit; defaults to true
   class UnitRate
-
     include Virtus.model
 
     attribute :external_property_id, String
@@ -24,8 +23,7 @@ module YieldStarClient
     attribute :best, Boolean, default: true
 
     def self.new_from(*args)
-      self.new(*args)
+      new(*args)
     end
-
   end
 end

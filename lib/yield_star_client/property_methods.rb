@@ -1,6 +1,5 @@
 module YieldStarClient
   module PropertyMethods
-
     def get_properties
       response = GetProperties::Request.execute(default_savon_params)
       GetProperties::Response.new(response).properties
@@ -19,6 +18,5 @@ module YieldStarClient
       )
       GetPropertyParameters::Response.new(response).property_parameters
     end
-
   end
 end

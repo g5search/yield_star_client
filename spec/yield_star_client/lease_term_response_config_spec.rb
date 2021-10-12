@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 module YieldStarClient
   describe LeaseTermResponseConfig do
@@ -7,8 +7,12 @@ module YieldStarClient
         accessor_method: :lease_term_rents,
         result_class: LeaseTermRent,
         soap_wrapper_element: :soap_wrapper_element,
-        soap_unit_element: :soap_unit_element,
+        soap_unit_element: :soap_unit_element
       )
+    end
+
+    subject(:resulting_lease_term_rents) do
+      FakeResponse.new(soap_response).send(accessor_method)
     end
 
     let(:accessor_method) { :lease_term_rents }
@@ -16,8 +20,8 @@ module YieldStarClient
 
     let(:soap_response) { double }
 
-    let(:lease_term_rent_hash_1) {{ hash: 1 }}
-    let(:lease_term_rent_hash_2) {{ hash: 2 }}
+    let(:lease_term_rent_hash_1) { { hash: 1 } }
+    let(:lease_term_rent_hash_2) { { hash: 2 } }
 
     let(:lease_term_rent_1) { double(result_class) }
     let(:lease_term_rent_2) { double(result_class) }
@@ -30,7 +34,7 @@ module YieldStarClient
       allow(ExtractLeaseTermRentHashes).to receive(:from).with(
         soap_response,
         soap_wrapper_element: :soap_wrapper_element,
-        soap_unit_element: :soap_unit_element,
+        soap_unit_element: :soap_unit_element
       ).and_return(lease_term_rent_hashes)
 
       allow(result_class).to receive(:new_from).
@@ -42,16 +46,11 @@ module YieldStarClient
         and_return(lease_term_rent_2)
     end
 
-    subject(:resulting_lease_term_rents) do
-      FakeResponse.new(soap_response).send(accessor_method)
-    end
-
-    it "returns lease term rents" do
+    it 'returns lease term rents' do
       expect(resulting_lease_term_rents).to eq([
-        lease_term_rent_1,
-        lease_term_rent_2,
-      ])
+                                                 lease_term_rent_1,
+                                                 lease_term_rent_2
+                                               ])
     end
-
   end
 end
