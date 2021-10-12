@@ -54,26 +54,9 @@ module YieldStarClient
     include RentMethods
     include LeaseTermRentMethods
 
-# <<<<<<< HEAD
     attr_accessor :configuration
 
     delegate *YieldStarClient::VALID_CONFIG_OPTIONS, to: :configuration
-# =======
-#     attr_writer(*YieldStarClient::VALID_CONFIG_OPTIONS, :logger)
-
-#     YieldStarClient::VALID_CONFIG_OPTIONS.each do |opt|
-#       define_method(opt) { get_value(opt) }
-#     end
-
-#     def debug=(val)
-#       @debug = val
-#       @log = debug?
-#     end
-
-#     def debug?
-#       get_value(:debug).to_s == 'true'
-#     end
-# >>>>>>> master
 
     # Initializes the client. All options are truly optional; if the option
     # is not supplied to this method, then it will be set based on the
@@ -89,13 +72,9 @@ module YieldStarClient
     # @option options [String] :namespace The XML namespace to use for requests.
     # @option options [Symbol] :ssl_version The TLS version used for secure connections
     # @option options [true,false] :debug true to enable debug logging of SOAP traffic; defaults to false
-# <<<<<<< HEAD
+
     def initialize(options={})
       @configuration = Configuration.new(options)
-# =======
-#     def initialize(options = {})
-#       options.each { |k, v| send("#{k}=", v) if respond_to?("#{k}=") }
-# >>>>>>> master
     end
 
     private
@@ -125,21 +104,6 @@ module YieldStarClient
     def soap_client
       @soap_client ||= Savon.client(
         element_form_default: :qualified,
-# <<<<<<< HEAD
-#         endpoint: self.endpoint.to_s,
-#         namespace: self.namespace,
-#         basic_auth: [self.username.to_s, self.password.to_s],
-#         log: self.log,
-#         logger: self.logger,
-#         ssl_version: self.ssl_version,
-# =======
-#         endpoint: endpoint.to_s,
-#         namespace: namespace,
-#         basic_auth: [username.to_s, password.to_s],
-#         log: debug?,
-#         logger: get_value(:logger),
-#         ssl_version: ssl_version
-# >>>>>>> master
         endpoint: endpoint.to_s,
         namespace: namespace,
         basic_auth: [username.to_s, password.to_s],
@@ -150,20 +114,8 @@ module YieldStarClient
     end
 
     def default_savon_params
-# <<<<<<< HEAD
       @configuration.to_h
-# =======
-#       {
-#         client_name: client_name,
-#         endpoint: endpoint.to_s,
-#         namespace: namespace,
-#         username: username.to_s,
-#         password: password,
-#         log: debug?,
-#         logger: logger,
-#         ssl_version: ssl_version
-#       }
-# >>>>>>> master
     end
+    
   end
 end
