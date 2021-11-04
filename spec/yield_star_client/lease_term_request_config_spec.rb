@@ -1,13 +1,13 @@
 require "spec_helper"
 
 module YieldStarClient
-  describe LeaseTermRequestConfig, type: :model do
-    module Testing
-      class FakeRequestClass < BaseRequest
-        configure_for_lease_term_rent request_element: :sample_request_element
-      end
+  module Testing
+    class FakeRequestClass < BaseRequest
+      configure_for_lease_term_rent request_element: :sample_request_element
     end
+  end
 
+  describe LeaseTermRequestConfig, type: :model do
     let(:fake_request_class) do
       Testing::FakeRequestClass
     end

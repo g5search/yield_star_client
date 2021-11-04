@@ -1,16 +1,16 @@
 require "spec_helper"
 
 module YieldStarClient
-  describe LeaseTermResponseConfig do
-    class FakeResponse < BaseResponse
-      configure_for_lease_term_rent(
-        accessor_method: :lease_term_rents,
-        result_class: LeaseTermRent,
-        soap_wrapper_element: :soap_wrapper_element,
-        soap_unit_element: :soap_unit_element
-      )
-    end
+  class FakeResponse < BaseResponse
+    configure_for_lease_term_rent(
+      accessor_method: :lease_term_rents,
+      result_class: LeaseTermRent,
+      soap_wrapper_element: :soap_wrapper_element,
+      soap_unit_element: :soap_unit_element
+    )
+  end
 
+  describe LeaseTermResponseConfig do
     subject(:resulting_lease_term_rents) do
       FakeResponse.new(soap_response).send(accessor_method)
     end
