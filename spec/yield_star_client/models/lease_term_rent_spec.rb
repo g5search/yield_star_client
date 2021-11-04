@@ -1,45 +1,45 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe LeaseTermRent, type: :virtus do
     it { is_expected.to be_a UnitRate }
 
-    context 'attributes' do
+    context "attributes" do
       subject { described_class }
 
       it { is_expected.to have_attribute(:make_ready_date, Date) }
       it { is_expected.to have_attribute(:move_in_date, Date) }
 
       it do
-        expect(subject).to have_attribute(:total_concession, Integer).
-          with_default(0)
+        expect(subject).to have_attribute(:total_concession, Integer)
+          .with_default(0)
       end
 
       it do
-        expect(subject).to have_attribute(:monthly_fixed_concession, Integer).
-          with_default(0)
+        expect(subject).to have_attribute(:monthly_fixed_concession, Integer)
+          .with_default(0)
       end
 
       it do
-        expect(subject).to have_attribute(:monthly_percent_concession, Float).
-          with_default(0.0)
+        expect(subject).to have_attribute(:monthly_percent_concession, Float)
+          .with_default(0.0)
       end
 
       it do
-        expect(subject).to have_attribute(:months_concession, Float).
-          with_default(0.0)
+        expect(subject).to have_attribute(:months_concession, Float)
+          .with_default(0.0)
       end
 
       it do
-        expect(subject).to have_attribute(:one_time_fixed_concession, Integer).
-          with_default(0)
+        expect(subject).to have_attribute(:one_time_fixed_concession, Integer)
+          .with_default(0)
       end
 
       it { is_expected.to have_attribute(:price_valid_end_date, Date) }
     end
 
-    describe '.new_from' do
-      it 'instantiates a LeaseTermRent from the YieldStar hash' do
+    describe ".new_from" do
+      it "instantiates a LeaseTermRent from the YieldStar hash" do
         lease_term_rent = double
         price_valid_end_date = Date.new(2014, 1, 2)
 

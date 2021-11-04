@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   module GetAvailableUnits
@@ -8,9 +8,9 @@ module YieldStarClient
       let(:fixture) do
         filename = File.join(
           SPEC_DIR,
-          'fixtures',
-          'get_available_units',
-          'multiple_floor_plans.xml'
+          "fixtures",
+          "get_available_units",
+          "multiple_floor_plans.xml"
         )
         File.read(filename)
       end
@@ -24,19 +24,19 @@ module YieldStarClient
       before do
         savon.mock!
 
-        savon.expects(:get_available_units).
-          with(
+        savon.expects(:get_available_units)
+          .with(
             message: {
               request: request_params
             }
-          ).
-          returns(fixture)
+          )
+          .returns(fixture)
       end
 
       after { savon.unmock! }
 
-      describe '#available_units' do
-        it 'returns an array of AvailableUnit objects' do
+      describe "#available_units" do
+        it "returns an array of AvailableUnit objects" do
           response = described_class.new(
             GetAvailableUnits::Request.execute(CONFIG)
           )

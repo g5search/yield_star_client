@@ -14,7 +14,7 @@ module YieldStarClient
     attribute :start_date, Date
 
     validates :unit_number, presence: true
-    validates :building, length: { maximum: 50 }
+    validates :building, length: {maximum: 50}
 
     def to_request_hash
       attributes.select do |_name, value|

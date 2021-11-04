@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   module GetRentSummary
@@ -8,9 +8,9 @@ module YieldStarClient
       let(:fixture) do
         filename = File.join(
           SPEC_DIR,
-          'fixtures',
-          'get_rent_summary',
-          'multiple_summaries.xml'
+          "fixtures",
+          "get_rent_summary",
+          "multiple_summaries.xml"
         )
         File.read(filename)
       end
@@ -24,19 +24,19 @@ module YieldStarClient
       before do
         savon.mock!
 
-        savon.expects(:get_rent_summary).
-          with(
+        savon.expects(:get_rent_summary)
+          .with(
             message: {
               request: request_params
             }
-          ).
-          returns(fixture)
+          )
+          .returns(fixture)
       end
 
       after { savon.unmock! }
 
-      describe '#rent_summaries_as_floor_plans' do
-        it 'returns an array of FloorPlan objects' do
+      describe "#rent_summaries_as_floor_plans" do
+        it "returns an array of FloorPlan objects" do
           response = described_class.new(
             GetRentSummary::Request.execute(CONFIG)
           )

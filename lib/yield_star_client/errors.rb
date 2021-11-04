@@ -32,7 +32,7 @@ module YieldStarClient
 
       case code
       when 401
-        YieldStarClient::AuthenticationError.new('Authentication Error', code)
+        YieldStarClient::AuthenticationError.new("Authentication Error", code)
       else
         YieldStarClient::ServerError.new(body, code)
       end
@@ -48,19 +48,19 @@ module YieldStarClient
         )
       end
 
-      error_class = if detail.has_key?(:authentication_fault)
-                      message = detail[:authentication_fault][:message]
-                      code = detail[:authentication_fault][:code]
-                      YieldStarClient::AuthenticationError.new(message, code)
-                    elsif detail.has_key?(:operation_fault)
-                      message = detail[:operation_fault][:message]
-                      code = detail[:operation_fault][:code]
-                      YieldStarClient::OperationError.new(message, code)
-                    elsif detail.has_key?(:internal_error_fault)
-                      message = detail[:internal_error_fault][:message]
-                      code = detail[:internal_error_fault][:code]
-                      YieldStarClient::InternalError.new(message, code)
-                    end
+      if detail.has_key?(:authentication_fault)
+        message = detail[:authentication_fault][:message]
+        code = detail[:authentication_fault][:code]
+        YieldStarClient::AuthenticationError.new(message, code)
+      elsif detail.has_key?(:operation_fault)
+        message = detail[:operation_fault][:message]
+        code = detail[:operation_fault][:code]
+        YieldStarClient::OperationError.new(message, code)
+      elsif detail.has_key?(:internal_error_fault)
+        message = detail[:internal_error_fault][:message]
+        code = detail[:internal_error_fault][:code]
+        YieldStarClient::InternalError.new(message, code)
+      end
     end
   end
 

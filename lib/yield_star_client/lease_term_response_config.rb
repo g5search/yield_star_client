@@ -15,8 +15,8 @@ module YieldStarClient
         define_method accessor_method do
           return @models if @models
 
-          result_class = self.class.lease_term_response_opts.
-                         fetch(:result_class)
+          result_class = self.class.lease_term_response_opts
+            .fetch(:result_class)
           hashes = extract_lease_term_rent_hashes(@soap_response)
           @models = hashes.map do |hash|
             result_class.new_from(hash)

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe LeaseTermResponseConfig do
@@ -20,8 +20,8 @@ module YieldStarClient
 
     let(:soap_response) { double }
 
-    let(:lease_term_rent_hash_1) { { hash: 1 } }
-    let(:lease_term_rent_hash_2) { { hash: 2 } }
+    let(:lease_term_rent_hash_1) { {hash: 1} }
+    let(:lease_term_rent_hash_2) { {hash: 2} }
 
     let(:lease_term_rent_1) { double(result_class) }
     let(:lease_term_rent_2) { double(result_class) }
@@ -37,20 +37,20 @@ module YieldStarClient
         soap_unit_element: :soap_unit_element
       ).and_return(lease_term_rent_hashes)
 
-      allow(result_class).to receive(:new_from).
-        with(lease_term_rent_hash_1).
-        and_return(lease_term_rent_1)
+      allow(result_class).to receive(:new_from)
+        .with(lease_term_rent_hash_1)
+        .and_return(lease_term_rent_1)
 
-      allow(result_class).to receive(:new_from).
-        with(lease_term_rent_hash_2).
-        and_return(lease_term_rent_2)
+      allow(result_class).to receive(:new_from)
+        .with(lease_term_rent_hash_2)
+        .and_return(lease_term_rent_2)
     end
 
-    it 'returns lease term rents' do
+    it "returns lease term rents" do
       expect(resulting_lease_term_rents).to eq([
-                                                 lease_term_rent_1,
-                                                 lease_term_rent_2
-                                               ])
+        lease_term_rent_1,
+        lease_term_rent_2
+      ])
     end
   end
 end
