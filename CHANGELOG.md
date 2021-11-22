@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.4.0.intg-1623.01
+* Remove rubocop
+* Add standard
+
 ## 3.3.0
 
 * Rails v6 compatible

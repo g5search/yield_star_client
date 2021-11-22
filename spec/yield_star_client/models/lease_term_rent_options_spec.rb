@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   describe LeaseTermRentOptions do
-    context 'attributes' do
+    context "attributes" do
       subject { described_class }
 
       it { is_expected.to have_attribute(:unit_number, String) }
@@ -16,29 +16,29 @@ module YieldStarClient
       it { is_expected.to have_attribute(:start_date, Date) }
     end
 
-    describe '#validate!' do
+    describe "#validate!" do
       let(:ltro) { described_class.new }
 
-      context 'it is invalid' do
-        it 'raises argument error' do
+      context "it is invalid" do
+        it "raises argument error" do
           allow(ltro).to receive(:invalid?).and_return(true)
           expect { ltro.validate! }.to raise_error(ArgumentError)
         end
       end
 
-      context 'it is valid' do
-        it 'does not raise error' do
+      context "it is valid" do
+        it "does not raise error" do
           allow(ltro).to receive(:invalid?).and_return(false)
           expect { ltro.validate! }.not_to raise_error
         end
       end
     end
 
-    context 'validations', type: :model do
+    context "validations", type: :model do
       subject do
         described_class.new(
-          unit_number: 'unit_number',
-          building: 'building',
+          unit_number: "unit_number",
+          building: "building",
           min_lease_term: 1,
           max_lease_term: 2,
           first_move_in_date: Date.new(2014, 1, 4),
@@ -53,12 +53,12 @@ module YieldStarClient
       it { is_expected.to validate_length_of(:building).is_at_most(50) }
     end
 
-    describe '#to_request_hash' do
+    describe "#to_request_hash" do
       subject { lease_term_rent_options.to_request_hash }
 
       let(:lease_term_rent_options) do
         described_class.new(
-          unit_number: 'unit_number',
+          unit_number: "unit_number",
           building: nil,
           min_lease_term: 1,
           max_lease_term: 2,
@@ -70,8 +70,8 @@ module YieldStarClient
         )
       end
 
-      it 'returns a hash of the attributes except those with nil values' do
-        expect(subject[:unit_number]).to eq 'unit_number'
+      it "returns a hash of the attributes except those with nil values" do
+        expect(subject[:unit_number]).to eq "unit_number"
         expect(subject).not_to have_key(:building)
         expect(subject[:min_lease_term]).to eq 1
         expect(subject[:first_move_in_date]).to eq Date.new(2014, 1, 4)

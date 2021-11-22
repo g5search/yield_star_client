@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 module YieldStarClient
   module GetProperty
     describe Response do
-      describe '#property' do
+      describe "#property" do
         subject { described_class.new(soap_response).property }
 
         let(:soap_response) do

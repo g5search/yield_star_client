@@ -1,15 +1,15 @@
-require 'configlet'
-require 'logger'
+require "configlet"
+require "logger"
 
 module YieldStarClient
   # All valid configuration options.
   #
   # @see YieldStarClient.configure
   VALID_CONFIG_OPTIONS = %i[endpoint username password namespace client_name
-                            debug logger ssl_version].freeze
+    debug logger ssl_version].freeze
 
-  DEFAULT_ENDPOINT = ENV.fetch('YIELD_STAR_ENDPOINT', 'https://rmsws.yieldstar.com/rmsws/AppExchange').freeze
-  DEFAULT_NAMESPACE = ENV.fetch('YIELD_STAR_NAMESPACE', 'http://yieldstar.com/ws/AppExchange/v1').freeze
+  DEFAULT_ENDPOINT = ENV.fetch("YIELD_STAR_ENDPOINT", "https://rmsws.yieldstar.com/rmsws/AppExchange").freeze
+  DEFAULT_NAMESPACE = ENV.fetch("YIELD_STAR_NAMESPACE", "http://yieldstar.com/ws/AppExchange/v1").freeze
   DEFAULT_SSL_VERSION = :TLSv1_2
 
   module Configuration
@@ -39,7 +39,7 @@ module YieldStarClient
     # True if debug logging of SOAP requests and responses has been enabled;
     # false otherwise.
     def debug?
-      self[:debug] == 'true'
+      self[:debug] == "true"
     end
 
     # Custom logger object for debug logging; defaults to STDOUT.

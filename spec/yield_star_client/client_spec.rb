@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe YieldStarClient::Client do
   subject { client }
@@ -6,25 +6,25 @@ describe YieldStarClient::Client do
   after { YieldStarClient.reset }
 
   let(:client) do
-    YieldStarClient::Client.new({ endpoint: endpoint,
+    YieldStarClient::Client.new({endpoint: endpoint,
                                   username: username,
                                   password: password,
                                   namespace: namespace,
                                   client_name: client_name,
                                   debug: debug,
-                                  logger: logger })
+                                  logger: logger})
   end
 
-  let(:endpoint) { 'https://foo.com?wsdl' }
+  let(:endpoint) { "https://foo.com?wsdl" }
   let(:default_endpoint) { YieldStarClient::DEFAULT_ENDPOINT }
-  let(:username) { 'test_user' }
-  let(:password) { 'secret' }
-  let(:namespace) { 'http://foo.com/namespace' }
-  let(:client_name) { 'test_client' }
+  let(:username) { "test_user" }
+  let(:password) { "secret" }
+  let(:namespace) { "http://foo.com/namespace" }
+  let(:client_name) { "test_client" }
   let(:debug) { true }
   let(:logger) { double }
 
-  it 'has the correct settings' do
+  it "has the correct settings" do
     expect(subject.endpoint).to eq endpoint
     expect(subject.username).to eq username
     expect(subject.password).to eq password
@@ -61,10 +61,10 @@ describe YieldStarClient::Client do
   # Methods from LeaseTermRentMethods
   it { is_expected.to respond_to(:get_lease_term_rent) }
 
-  context 'with default configuration' do
+  context "with default configuration" do
     subject(:client) { YieldStarClient::Client.new }
 
-    it 'has the correct settings' do
+    it "has the correct settings" do
       expect(client.endpoint).to eq default_endpoint
       expect(client.username).to be_blank
       expect(client.password).to be_blank
@@ -76,196 +76,196 @@ describe YieldStarClient::Client do
     it { is_expected.not_to be_debug }
   end
 
-  describe '#endpoint=' do
+  describe "#endpoint=" do
     subject { client.endpoint = new_endpoint }
 
-    context 'with a new endpoint' do
-      let(:new_endpoint) { 'http://new-foo.com/service/' }
+    context "with a new endpoint" do
+      let(:new_endpoint) { "http://new-foo.com/service/" }
 
-      it 'changes the endpoint' do
+      it "changes the endpoint" do
         expect { subject }.to change(client, :endpoint).from(endpoint).to(new_endpoint)
       end
     end
 
-    context 'with a nil endpoint' do
+    context "with a nil endpoint" do
       let(:new_endpoint) { nil }
 
-      context 'when there is no configured endpoint' do
-        it 'changes to the default endpoint' do
+      context "when there is no configured endpoint" do
+        it "changes to the default endpoint" do
           expect { subject }.to change(client, :endpoint).from(endpoint).to(default_endpoint)
         end
       end
 
-      context 'when there is a configured endpoint' do
-        let(:configured_endpoint) { 'http://configured.endpoint.com' }
+      context "when there is a configured endpoint" do
+        let(:configured_endpoint) { "http://configured.endpoint.com" }
 
         before { YieldStarClient.configure { |config| config.endpoint = configured_endpoint } }
 
-        it 'changes to the configured endpoint' do
+        it "changes to the configured endpoint" do
           expect { subject }.to change(client, :endpoint).from(endpoint).to(configured_endpoint)
         end
       end
     end
   end
 
-  describe '#username=' do
+  describe "#username=" do
     subject { client.username = new_username }
 
-    let(:new_username) { 'new username' }
+    let(:new_username) { "new username" }
 
-    it 'changes the username' do
+    it "changes the username" do
       expect { subject }.to change(client, :username).from(username).to(new_username)
     end
 
-    context 'with a nil username' do
+    context "with a nil username" do
       let(:new_username) { nil }
 
-      context 'when there is no configured username' do
-        it 'changes the username to nil' do
+      context "when there is no configured username" do
+        it "changes the username to nil" do
           expect { subject }.to change(client, :username).from(username).to(nil)
         end
       end
 
-      context 'when there is a configured username' do
-        let(:configured_username) { 'configured user' }
+      context "when there is a configured username" do
+        let(:configured_username) { "configured user" }
 
         before { YieldStarClient.configure { |config| config.username = configured_username } }
 
-        it 'changes the username to the configured username' do
+        it "changes the username to the configured username" do
           expect { subject }.to change(client, :username).from(username).to(configured_username)
         end
       end
     end
   end
 
-  describe '#password=' do
+  describe "#password=" do
     subject { client.password = new_password }
 
-    let(:new_password) { 'new secret' }
+    let(:new_password) { "new secret" }
 
-    it 'changes the password' do
+    it "changes the password" do
       expect { subject }.to change(client, :password).from(password).to(new_password)
     end
 
-    context 'with a nil password' do
+    context "with a nil password" do
       let(:new_password) { nil }
 
-      context 'when there is no configured password' do
-        it 'changes the password to nil' do
+      context "when there is no configured password" do
+        it "changes the password to nil" do
           expect { subject }.to change(client, :password).from(password).to(nil)
         end
       end
 
-      context 'when there is a configured password' do
-        let(:configured_password) { 'configured password' }
+      context "when there is a configured password" do
+        let(:configured_password) { "configured password" }
 
         before { YieldStarClient.configure { |config| config.password = configured_password } }
 
-        it 'changes the password to the configured value' do
+        it "changes the password to the configured value" do
           expect { subject }.to change(client, :password).from(password).to(configured_password)
         end
       end
     end
   end
 
-  describe '#debug=' do
+  describe "#debug=" do
     subject { client.debug = new_debug }
 
-    context 'with a boolean value' do
+    context "with a boolean value" do
       let(:debug) { false }
       let(:new_debug) { true }
 
-      it 'changes the debug setting' do
+      it "changes the debug setting" do
         expect { subject }.to change(client, :debug?).from(debug).to(new_debug)
       end
     end
 
-    context 'with nil' do
+    context "with nil" do
       let(:debug) { false }
       let(:new_debug) { nil }
 
-      context 'when debug logging is enabled globally' do
+      context "when debug logging is enabled globally" do
         before do
           YieldStarClient.configure { |config| config.debug = true }
         end
 
-        it 'enables debug logging' do
+        it "enables debug logging" do
           expect { subject }.to change(client, :debug?).from(false).to(true)
         end
       end
 
-      context 'when debug logging is disabled globally' do
+      context "when debug logging is disabled globally" do
         let(:debug) { true }
 
         before do
           YieldStarClient.configure { |config| config.debug = false }
         end
 
-        it 'disables debug logging' do
+        it "disables debug logging" do
           expect { subject }.to change(client, :debug?).from(true).to(false)
         end
       end
     end
   end
 
-  describe '#logger=' do
+  describe "#logger=" do
     subject { client.logger = new_logger }
 
-    context 'with nil' do
+    context "with nil" do
       let(:new_logger) { nil }
 
-      context 'when there is a logger configured globally' do
+      context "when there is a logger configured globally" do
         let(:global_logger) { double }
 
         before do
           YieldStarClient.configure { |config| config.logger = global_logger }
         end
 
-        it 'sets the logger to the global logger' do
+        it "sets the logger to the global logger" do
           subject
           client.logger.should == global_logger
         end
       end
     end
 
-    context 'with custom logger' do
+    context "with custom logger" do
       let(:new_logger) { double }
 
-      it 'changes the logger' do
+      it "changes the logger" do
         expect { subject }.to change(client, :logger).to(new_logger)
       end
     end
   end
 
-  describe '#client_name=' do
+  describe "#client_name=" do
     subject { client.client_name = new_client_name }
 
-    context 'with nil' do
+    context "with nil" do
       let(:new_client_name) { nil }
 
-      context 'when there is a client_name configured globally' do
-        let(:global_client_name) { 'global_client' }
+      context "when there is a client_name configured globally" do
+        let(:global_client_name) { "global_client" }
 
         before do
           YieldStarClient.configure { |config| config.client_name = global_client_name }
         end
 
-        it 'changes the client name to match the global configuration' do
+        it "changes the client name to match the global configuration" do
           expect { subject }.to change(client, :client_name).from(client_name).to(global_client_name)
         end
       end
 
-      context 'when there is no client_name configured globally' do
-        it 'resets the client name' do
+      context "when there is no client_name configured globally" do
+        it "resets the client name" do
           expect { subject }.to change(client, :client_name).from(client_name).to(nil)
         end
       end
     end
 
-    context 'with client name' do
-      let(:new_client_name) { 'Some new client name' }
+    context "with client name" do
+      let(:new_client_name) { "Some new client name" }
 
-      it 'changes the client_name' do
+      it "changes the client_name" do
         expect { subject }.to change(client, :client_name).from(client_name).to(new_client_name)
       end
     end

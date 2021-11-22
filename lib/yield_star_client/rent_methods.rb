@@ -1,5 +1,5 @@
-require 'yield_star_client/validations'
-require 'modelish'
+require "yield_star_client/validations"
+require "modelish"
 
 module YieldStarClient
   module RentMethods
@@ -17,8 +17,8 @@ module YieldStarClient
     # @raise [YieldStarClient::InternalError] when the service raises an InternalError fault
     # @raise [YieldStarClient::ServerError] when any other server-side error occurs
     def get_rent_summary(external_property_id)
-      request_args = default_savon_params.
-                     merge(external_property_id: external_property_id)
+      request_args = default_savon_params
+        .merge(external_property_id: external_property_id)
       response = GetRentSummary::Request.execute(request_args)
       GetRentSummary::Response.new(response).rent_summaries
     end

@@ -1,5 +1,5 @@
-require 'yield_star_client/validations'
-require 'modelish'
+require "yield_star_client/validations"
+require "modelish"
 
 module YieldStarClient
   module FloorPlanMethods
@@ -50,8 +50,8 @@ module YieldStarClient
 
       response = GetRentSummary::Request.execute(request_args)
 
-      floor_plans = GetRentSummary::Response.new(response).
-                    rent_summaries_as_floor_plans
+      floor_plans = GetRentSummary::Response.new(response)
+        .rent_summaries_as_floor_plans
 
       available_units = get_available_units(external_property_id)
 
@@ -67,13 +67,13 @@ module YieldStarClient
     private
 
     def get_available_units(external_property_id)
-      request_args = default_savon_params.
-                     merge(external_property_id: external_property_id)
+      request_args = default_savon_params
+        .merge(external_property_id: external_property_id)
 
       response = GetAvailableUnits::Request.execute(request_args)
 
-      GetAvailableUnits::Response.new(response).
-        available_units
+      GetAvailableUnits::Response.new(response)
+        .available_units
     end
   end
 end
