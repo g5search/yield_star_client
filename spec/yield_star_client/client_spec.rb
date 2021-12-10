@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe YieldStarClient::Client do
   subject { client }
@@ -18,7 +18,7 @@ describe YieldStarClient::Client do
 
   end
 
-  let(:endpoint) { 'https://foo.com?wsdl' }
+  let(:endpoint) { "https://foo.com?wsdl" }
   let(:default_endpoint) { YieldStarClient::DEFAULT_ENDPOINT }
   let(:username) { 'test_user' }
   let(:password) { 'secret' }
@@ -28,7 +28,7 @@ describe YieldStarClient::Client do
   let(:logger) { double() }
   let(:ssl_version) { double(:ssl_version) }
 
-  it 'has the correct settings' do
+  it "has the correct settings" do
     expect(subject.endpoint).to eq endpoint
     expect(subject.username).to eq username
     expect(subject.password).to eq password
@@ -72,10 +72,10 @@ describe YieldStarClient::Client do
   # Methods from LeaseTermRentMethods
   it { is_expected.to respond_to(:get_lease_term_rent) }
 
-  context 'with default configuration' do
+  context "with default configuration" do
     subject(:client) { YieldStarClient::Client.new }
 
-    it 'has the correct settings' do
+    it "has the correct settings" do
       expect(client.endpoint).to eq default_endpoint
       expect(client.username).to be_blank
       expect(client.password).to be_blank
@@ -116,7 +116,6 @@ describe YieldStarClient::Client do
 
     it 'set false value to log' do
       expect { configuration.reset }.to change(subject, :log).to(false)
-
     end
   end
 end

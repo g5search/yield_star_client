@@ -1,10 +1,13 @@
 # CHANGELOG
 
-## 3.3.1-intg1232.01
+## 3.4.1-intg1232.01
 
 * Remove configlet gem
 * Enable logging
 
+## 3.4.0.intg-1623.01
+* Remove rubocop
+* Add standard
 
 ## 3.3.0
 

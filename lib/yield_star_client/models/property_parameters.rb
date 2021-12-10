@@ -28,8 +28,8 @@ module YieldStarClient
       params = [hash[:parameter]].flatten.compact
 
       params.each do |param|
-        key = param[:name].downcase.gsub(/(max|min)imum/, '\1').
-              gsub(/\s+/, '_').to_sym
+        key = param[:name].downcase.gsub(/(max|min)imum/, '\1')
+          .gsub(/\s+/, "_").to_sym
         resulting_hash[key] = param[:value]
       end
 

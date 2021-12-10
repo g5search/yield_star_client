@@ -20,17 +20,17 @@ module YieldStarClient
       :ssl_version,
       presence: true
     )
-    validates :client_name, length: { maximum: 16 }
+    validates :client_name, length: {maximum: 16}
 
     def self.execute(attributes)
       new(attributes).execute
     end
 
     def execute
-      raise ArgumentError, errors.full_messages.join('; ') if invalid?
+      raise ArgumentError, errors.full_messages.join("; ") if invalid?
 
-      soap_action = self.class.const_get('SOAP_ACTION')
-      raise ArgumentError, 'define SOAP_ACTION' unless soap_action
+      soap_action = self.class.const_get("SOAP_ACTION")
+      raise ArgumentError, "define SOAP_ACTION" unless soap_action
 
       SoapClient.request(soap_action, request_args)
     end

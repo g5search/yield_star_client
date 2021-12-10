@@ -8,8 +8,8 @@ module YieldStarClient
       def property_parameters
         return @property_parameters if @property_parameters
 
-        @property_parameters = @soap_response.
-                               to_hash[:get_property_parameters_response]\
+        @property_parameters = @soap_response
+          .to_hash[:get_property_parameters_response]\
           [:return]
         @property_parameters = PropertyParameters.new_from(@property_parameters)
       end
