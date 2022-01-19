@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 3.4.1-intg1232.01
+## 3.4.1
 
 * Remove configlet gem
 * Enable logging
