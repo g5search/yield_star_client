@@ -54,20 +54,9 @@ module YieldStarClient
     include RentMethods
     include LeaseTermRentMethods
 
-    attr_writer(*YieldStarClient::VALID_CONFIG_OPTIONS, :logger)
+    attr_accessor :configuration
 
-    YieldStarClient::VALID_CONFIG_OPTIONS.each do |opt|
-      define_method(opt) { get_value(opt) }
-    end
-
-    def debug=(val)
-      @debug = val
-      @log = debug?
-    end
-
-    def debug?
-      get_value(:debug).to_s == "true"
-    end
+    delegate *YieldStarClient::VALID_CONFIG_OPTIONS, to: :configuration
 
     # Initializes the client. All options are truly optional; if the option
     # is not supplied to this method, then it will be set based on the
@@ -83,8 +72,9 @@ module YieldStarClient
     # @option options [String] :namespace The XML namespace to use for requests.
     # @option options [Symbol] :ssl_version The TLS version used for secure connections
     # @option options [true,false] :debug true to enable debug logging of SOAP traffic; defaults to false
-    def initialize(options = {})
-      options.each { |k, v| send("#{k}=", v) if respond_to?("#{k}=") }
+
+    def initialize(options={})
+      @configuration = Configuration.new(options)
     end
 
     private
@@ -117,35 +107,15 @@ module YieldStarClient
         endpoint: endpoint.to_s,
         namespace: namespace,
         basic_auth: [username.to_s, password.to_s],
-        log: debug?,
-        logger: get_value(:logger),
-        ssl_version: ssl_version
+        log: log,
+        logger: logger,
+        ssl_version: ssl_version,
       )
     end
 
-    # Retrieves an attribute's value. If the attribute has not been set
-    # on this object, it is retrieved from the global configuration.
-    #
-    # @see YieldStarClient.configure
-    #
-    # @param [Symbol] attribute the name of the attribute
-    # @return [String] the value of the attribute
-    def get_value(attribute)
-      local_val = instance_variable_get("@#{attribute}")
-      local_val.nil? ? YieldStarClient.send(attribute) : local_val
-    end
-
     def default_savon_params
-      {
-        client_name: client_name,
-        endpoint: endpoint.to_s,
-        namespace: namespace,
-        username: username.to_s,
-        password: password,
-        log: debug?,
-        logger: logger,
-        ssl_version: ssl_version
-      }
+      @configuration.to_h
     end
+    
   end
 end

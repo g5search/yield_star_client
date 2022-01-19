@@ -25,7 +25,5 @@ require "yield_star_client/extract_rent_summary_hashes"
 require "yield_star_client/configuration"
 
 module YieldStarClient
-  extend Configuration
-
-  require "yield_star_client/client"
+  require 'yield_star_client/client'
 end
